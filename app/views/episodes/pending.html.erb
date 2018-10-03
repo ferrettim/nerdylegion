@@ -1,0 +1,71 @@
+<% if @episodes.count > 0 %>
+  <div class="col-md-12">
+    <table class="table table-responsive table-condensed table-striped">
+      <thead>
+        <tr>
+          <td>Logo</td>
+          <td>Podcast</td>
+          <td>Episode</td>
+          <td>Title</td>
+          <td>Created</td>
+          <td>Scheduled Date</td>
+          <td>Status</td>
+          <td></td>
+          <td class="text-center">Actions</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @episodes.each do |e| %>
+          <% if e.podcast.user_id == current_user.id || e.podcast.user2_id == current_user.id || e.podcast.user3_id == current_user.id || e.podcast.producer_id == current_user.id || current_user.admin? %>
+            <tr>
+              <td><%= image_tag e.podcast.logourl.thumb, width: "25px", alt: e.podcast.title %></td>
+              <td><%= e.podcast.title %></td>
+              <td><%= e.episode.to_s %></td>
+              <td><%= e.title %></td>
+              <% if e.created_at? %>
+                <td><%= e.created_at.strftime("%B %d, %Y") %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <% if e.published_on? %>
+                <td><%= e.published_on.strftime("%B %d, %Y %H:%M") %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <td><%= e.status %></td>
+              <td class="text-right"><%= link_to "View", episode_path(e.slug) %></td>
+              <td class="text-center"><%= link_to "Edit", edit_episode_path(e.slug) %></td>
+              <td class="text-right"><%= link_to "Delete", episode_path(e.slug), method: :delete %></td>
+            </tr>
+          <% else %>
+          <tr>
+            <td><%= image_tag e.podcast.logourl.thumb, width: "25px", alt: e.podcast.title %></td>
+            <td><%= e.podcast.title %></td>
+            <td><%= e.episode.to_s %></td>
+            <td><%= e.title %></td>
+            <% if e.created_at? %>
+              <td><%= e.created_at.strftime("%B %d, %Y") %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
+            <% if e.published_on? %>
+              <td><%= e.published_on.strftime("%B %d, %Y %H:%M") %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
+            <td><%= e.status %></td>
+            <td class="text-right"></td>
+            <td class="text-center">N/A</td>
+            <td class="text-right"></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="col-md-12">
+    <h3>No drafts or posts scheduled</h3>
+  </div>
+<% end %>

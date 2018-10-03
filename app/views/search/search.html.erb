@@ -1,0 +1,28 @@
+<div class="container panel panel-default">
+    <br />
+    <h1 class="body-header"><%= @episodes_count %> Search Results For "<%= params[:q].titleize %>" In Episodes</h1>
+    <br />
+    <% @episodes.each do |episode| %>
+      <div class="col-md-12">
+        <div class="col-md-2">
+          <%= link_to episode.podcast, title: episode.podcast.title do %>
+            <%= image_tag episode.podcast.logourl.small, class: "img-responsive", alt: episode.podcast.title %>
+          <% end %><br />
+        </div>
+        <div class="col-md-10">
+          <h2 class="body-header">
+            <%= link_to episode, title: "Ep " + episode.episode.to_s + ": " + episode.title do %>
+              <%= episode.title %>
+            <% end %>
+          </h2>
+          <p class="small muted">Released <%= episode.published_on.strftime("%b %d, %Y") %></p>
+          <p><%= strip_tags(episode.description.truncate(250, separator: '')) %></p>
+          <% if episode.description.length > 250 %> | <%= link_to "Read More", episode, title: "Read more" %><% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<% if @pagy.count > 5 %>
+  <div class="text-center" style="margin-top: -40px;"><%== pagy_nav_bootstrap(@pagy).html_safe %></div>
+<% end %>

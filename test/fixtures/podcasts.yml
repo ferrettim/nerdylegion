@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  genre: MyString
+  language: MyString
+  mature: false
+  status: MyString
+  published_on: 2017-06-13 12:47:02
+  twitter: MyString
+  google: MyString
+  itunes: MyString
+  stitcher: MyString
+  tunein: MyString
+
+two:
+  title: MyString
+  description: MyText
+  genre: MyString
+  language: MyString
+  mature: false
+  status: MyString
+  published_on: 2017-06-13 12:47:02
+  twitter: MyString
+  google: MyString
+  itunes: MyString
+  stitcher: MyString
+  tunein: MyString

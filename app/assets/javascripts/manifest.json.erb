@@ -1,0 +1,19 @@
+<% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
+{
+  "name": "Nerdy Legion Podcast Network",
+  "short_name": "Nerdy Legion",
+  "start_url": "/",
+  "icons": [
+  <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
+    {
+      "src": "<%= image_path "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg" %>",
+      "sizes": "<%= dim %>",
+      "type": "image/png"
+    }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
+  <% end %>
+  ],
+  "theme_color": "#eb6864",
+  "background_color": "#FFFFFF",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}

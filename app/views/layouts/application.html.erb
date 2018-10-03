@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="fXdxoXSNBjFWM75hh3nn9wm4O6FsX2DgEQO1qTpgfy4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nerdylegion" />
+    <meta name="twitter:creator" content="@nerdylegion" />
+    <% if yield(:og_title).present? %>
+      <meta name="twitter:title" content="<%= yield(:og_title) %>" />
+    <% else %>
+      <meta name="twitter:title" content="The Nerdy Legion Podcast Network" />
+    <% end %>
+    <% if yield(:og_description).present? %>
+      <meta name="twitter:description" content="<%= yield(:og_description) %>" />
+    <% else %>
+      <meta name="twitter:description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+    <% end %>
+    <% if yield(:meta_description).present? %>
+      <meta name="description" content="<%= yield(:meta_description) %>" />
+    <% else %>
+      <meta name="description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+    <% end %>
+    <meta property="fb:app_id" content="<%= ENV['FB_APP_ID'] %>" />
+    <% if yield(:og_title).present? %>
+      <meta property="og:title" content="<%= yield(:og_title) %>" />
+    <% else %>
+      <meta property="og:title" content="The Nerdy Legion Podcast Network" />
+    <% end %>
+    <% if yield(:og_description).present? %>
+      <meta property="og:description" content="<%= yield(:og_description) %>" />
+    <% else %>
+      <meta property="og:description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+    <% end %>
+    <% if yield(:og_type).present? %>
+      <meta property="og:type" content="<%= yield(:og_type) %>" />
+    <% else %>
+      <meta property="og:type" content="website" />
+    <% end %>
+    <% if yield(:og_audio).present? %>
+      <meta property="og:audio" content="<%= yield(:og_audio) %>" />
+      <meta property="og:audio:type" content="audio/mpeg" />
+    <% end %>
+    <% if yield(:og_url).present? %>
+      <meta property="og:url" content="<%= yield(:og_url) %>" />
+    <% else %>
+      <meta property="og:url" content="https://nerdylegion.com" />
+    <% end %>
+    <% if yield(:og_image).present? %>
+      <meta property="og:image" content="<%= yield(:og_image) %>" />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content="350" />
+      <meta property="og:image:height" content="350" />
+    <% else %>
+      <meta property="og:image" content="https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg" />
+      <meta property="og:image:type" content="image/jpeg" />
+    <% end %>
+    <meta property="og:site_name" content="The Nerdy Legion Podcast Network" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#eb6864" />
+    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" type="image/x-icon" href="https://nl1.nyc3.digitaloceanspaces.com/assets/favicon.ico" />
+    <% if yield(:meta_title).present? %>
+      <title><%= yield(:meta_title) %></title>
+    <% else %>
+      <title>Nerdy Legion Podcast Network</title>
+    <% end %>
+    <%= stylesheet_link_tag 'application', :media => "all" %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <% if controller_name == "pages" && action_name == "analytics" %>
+      <%= javascript_include_tag "//www.google.com/jsapi" %>
+      <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js", "chartkick" %>
+    <% end %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: Rails.env.production?, defer: true %>
+    
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+
+  <% if request.path_info.include?('new') %>
+    <body class="container">
+  <% elsif request.path_info.include?('edit') %>
+    <body class="container">
+  <% elsif request.path_info.include?('about') %>
+    <body class="container">
+  <% elsif request.path_info.include?('people') %>
+    <body class="container">
+  <% elsif request.path_info.include?('pending') %>
+    <body class="container">
+  <% elsif request.path_info.include?('analytics') %>
+    <body class="container">
+  <% elsif request.path_info.include?('users') %>
+    <body class="container">
+  <% elsif controller_name == "episodes" && action_name == "index" %>
+    <body class="container">
+  <% else %>
+    <body class="container track_body" %>
+  <% end %>
+
+    <div id="fb-root"></div>
+
+    <%= render 'layouts/header' %>
+    <% flash.each do |name, msg| %>
+      <div id="notice_wrapper">
+        <% if name == "alert" %>
+          <div class="alert alert-danger alert-dismissible alert-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= msg %>
+          </div>
+        <% else %>
+          <div class="alert alert-success alert-dismissible alert-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <%= msg %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </body>
+
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://nerdylegion.com",
+    "image": "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg",
+    "description": "The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more.",
+    "contactPoint": [
+      { "@type": "ContactPoint",
+        "url": "https://nerdylegion.com",
+        "contactType": "customer service"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/nerdylegion",
+      "https://www.twitter.com/nerdylegion"
+    ]
+  }
+  </script>
+</html>

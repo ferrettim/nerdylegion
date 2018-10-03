@@ -1,0 +1,49 @@
+update_average:
+  cron: "45 */3 * * *"
+  class: UpdateAverage
+  queue: cron
+
+update_episode_thisweek:
+  cron: "1 */4 * * *"
+  class: UpdateEpisodeThisWeek
+  queue: cron
+
+update_episode_thismonth:
+  cron: "30 */4 * * *"
+  class: UpdateEpisodeThisMonth
+  queue: cron
+
+update_last_month:
+  cron: "55 0 1 * *"
+  class: UpdateLastMonth
+  queue: cron
+
+update_last_week:
+  cron: "25 0 * * 1"
+  class: UpdateLastWeek
+  queue: cron
+
+update_subscribers:
+  cron: "48 */3 * * *"
+  class: UpdateSubscribers
+  queue: cron
+
+update_this_month:
+  cron: "50 */3 * * *"
+  class: UpdateThisMonth
+  queue: cron
+
+update_this_week:
+  cron: "20 */3 * * *"
+  class: UpdateThisWeek
+  queue: cron
+
+update_today:
+  cron: "15 */2 * * *"
+  class: UpdateToday
+  queue: cron
+
+update_yesterday:
+  cron: "18 0 * * *"
+  class: UpdateYesterday
+  queue: cron

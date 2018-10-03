@@ -1,0 +1,278 @@
+<% meta_title "Analytics | The Nerdy Legion Podcast Network" %>
+
+<div class="col-md-12">
+  <div class="col-md-12">
+    <%= form_tag "", :method => 'get', :role => "select", class: "form-inline" do %>
+      <div class="col-md-9">
+        <select name="name" class="form-control" style="width: 100% !important;">
+          <option value="">All Podcasts</option>
+          <% @optionstitle.each do |p| %>
+            <% if params[:name] == p.title.to_s %>
+              <option value="<%= p.title.to_s %>" selected="<%= p.title.to_s %>"><%= p.title.to_s %></option>
+            <% else %>
+              <option value="<%= p.title.to_s %>"><%= p.title.to_s %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary" style="width: 100% !important;">Filter Results</button>
+      </div>
+    <% end %>
+    <div class="clearfix"><hr /></div>
+
+<% if params[:name].present? %>
+
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="body-header text-center">Average/Episode</h3>
+      <h4 class="stat-header text-center">
+        <% if @podcast.average > 0 %>
+          <%= @podcast.average %>
+        <% else %>
+          No Data
+        <% end %>
+      </h4>
+      <h5 class="percent-header text-center">
+        Based on monthly numbers
+      </h5>
+    </div>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="body-header text-center">Today</h3>
+      <h4 class="stat-header text-center">
+        <%= @podcast.today %>
+        <% if @podcast.today? %>
+          <% if @podcast.today > @podcast.yesterday %>
+            <i class="green-arrow fa fa-arrow-up"></i>
+          <% else %>
+            <i class="red-arrow fa fa-arrow-down"></i>
+          <% end %>
+        <% end %>
+      </h4>
+      <h5 class="percent-header text-center">
+        <% if @podcast.yesterday == 0 %>
+          No data for yesterday
+        <% else %>
+          <%= ((@podcast.today.to_f / @podcast.yesterday.to_f) * 100.0).round(2) %>% yesterday
+        <% end %>
+      </h5>
+    </div>
+  </div>
+</div>
+  <div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="body-header text-center">Past 7 Days</h3>
+      <h4 class="stat-header text-center">
+        <%= @podcast.thisweek %>
+        <% if @podcast.thisweek? %>
+          <% if @podcast.thisweek > @podcast.lastweek %>
+            <i class="green-arrow fa fa-arrow-up"></i>
+          <% else %>
+            <i class="red-arrow fa fa-arrow-down"></i>
+          <% end %>
+        <% end %>
+      </h4>
+      <h5 class="percent-header text-center">
+        <% if @podcast.lastweek == 0 %>
+          No data for last week
+        <% else %>
+          <%= ((@podcast.thisweek.to_f / @podcast.lastweek.to_f) * 100.0).round(2) %>% last week
+        <% end %>
+      </h5>
+    </div>
+  </div>
+</div>
+  <div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3 class="body-header text-center">Past 30 Days</h3>
+      <h4 class="stat-header text-center">
+        <%= @podcast.thismonth %>
+        <% if @podcast.thismonth? %>
+          <% if @podcast.thismonth > @podcast.lastmonth %>
+            <i class="green-arrow fa fa-arrow-up"></i>
+          <% else %>
+            <i class="red-arrow fa fa-arrow-down"></i>
+          <% end %>
+        <% end %>
+      </h4>
+      <h5 class="percent-header text-center">
+        <% if @podcast.lastmonth == 0 %>
+          No data for last month
+        <% else %>
+          <%= ((@podcast.thismonth.to_f / @podcast.lastmonth.to_f) * 100.0).round(2) %>% last month
+        <% end %>
+      </h5>
+    </div>
+  </div>
+</div>
+
+  <br />
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="body-header">Platforms</h3>
+      </div>
+      <div class="panel-body">
+        <%= pie_chart pages_platforms_path(name: @podcast.title), donut: true, legend: "bottom", messages: {empty: "No available data. Please check back later."}, adapter: "google", defer: true %>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="col-md-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="body-header">Time of Day Distribution</h3>
+      </div>
+      <div class="panel-body">
+        <%= column_chart pages_timeofday_path(name: @podcast.title), messages: {empty: "No available data. Please check back later."}, defer: true %>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="body-header">Top Episodes (Past 7 Days)</h3>
+      </div>
+      <div class="panel-body">
+        <ol>
+          <% Episode.where(podcast_id: @podcast.id).where(status: "Published").order(thisweek: :desc).limit(5).each do |e| %>
+            <li style="margin-left: -20px;">
+              <div class="col-md-11">
+                <strong><small><%= link_to e.title.to_s, e, title: e.title.to_s %></small></strong>
+              </div>
+              <div class="col-md-1">
+                <strong><small><%= e.thisweek.to_s %></small></strong>
+              </div>
+            </li>
+            <div class="clearfix"></div>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="body-header">Top Episodes (Past 30 Days)</h3>
+      </div>
+      <div class="panel-body">
+        <ol>
+          <% Episode.where(podcast_id: @podcast.id).where(status: "Published").order(thismonth: :desc).limit(5).each do |e| %>
+            <li style="margin-left: -20px;">
+              <div class="col-md-11">
+                <strong><small><%= link_to e.title.to_s, e, title: e.title.to_s %></small></strong>
+              </div>
+              <div class="col-md-1">
+                <strong><small><%= e.thismonth.to_s %></small></strong>
+              </div>
+            </li>
+            <div class="clearfix"></div>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="body-header">Locations</h3>
+      </div>
+      <div class="panel-body">
+        <%= geo_chart pages_locations_path(name: @podcast.title), messages: {empty: "No available data. Please check back later."}, defer: true %>
+      </div>
+    </div>
+  </div>
+
+    <br />
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3 class="body-header text-center">Unique Listeners</h3>
+          <h4 class="stat-header text-center">
+            <%= @podcast.subscribers * 3 %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3 class="body-header text-center">Subscribed</h3>
+          <h4 class="stat-header text-center">
+            <% if @podcast.subscribers == 0 %>
+              <small>No data</small>
+            <% else %>
+              <%= '%.2f' % ((1- (@podcast.subscribers.to_f/@podcast.average.to_f)) * 100) %>%
+            <% end %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3 class="body-header text-center">Not Subscribed</h3>
+          <h4 class="stat-header text-center">
+            <% if @podcast.subscribers == 0 %>
+              <small>No data</small>
+            <% else %>
+              <%= '%.2f' % ((@podcast.subscribers.to_f/@podcast.average.to_f) * 100) %>%
+            <% end %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+
+  <% unless params[:name].present? %>
+
+    <br />
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="body-header">Unique Listeners</h3>
+          </div>
+          <div class="panel-body">
+            <ol>
+              <% @subscribers.each do |a| %>
+                <small><li style="margin-left: -20px;"><strong><%= link_to a.title.to_s, analytics_path + "?utf8=✓&name=" + a.title.to_param %> <span class="pull-right"><%= a.subscribers * 3 %></span></strong></li></small>
+              <% end %>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="body-header">Average Per Episode</h3>
+          </div>
+          <div class="panel-body">
+            <ol>
+              <% @average.each do |a| %>
+                <small><li style="margin-left: -20px;"><strong><%= link_to a.title.to_s, analytics_path + "?utf8=✓&name=" + a.title.to_param %> <span class="pull-right"><%= a.average.to_s %></span></strong></li></small>
+              <% end %>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+  <% end %>
+
+</div>

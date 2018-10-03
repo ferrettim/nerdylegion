@@ -1,0 +1,7 @@
+:concurrency: 25
+:queues:
+  - default
+  - ahoy
+  - analytics
+  - audio_processing
+  - cron

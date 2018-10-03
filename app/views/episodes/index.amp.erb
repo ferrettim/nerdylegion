@@ -1,0 +1,26 @@
+<% @episodes.each do |e| %>
+          <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
+            <amp-img src='<%= e.podcast.logo.url(:small) %>' alt='<%= e.podcast.title %>' height='200' width='200' layout="responsive"></amp-img>
+          <% end %>
+          <h2>
+            <%= link_to e, title: e.podcast.title + "Ep " + e.episode.to_s + ": " + e.title.titleize.to_s do %>
+              <%= e.podcast.title %> Ep <%= e.episode %>: <%= e.title.titleize %>
+            <% end %>
+          </h2>
+          <h5>Published <%= e.published_on.strftime("%b %d, %Y")%>
+                                <% if e.audiourl? %>
+                                  (<%= ((Mechanize.new.head( URI.join("https:", e.audiourl.to_s) )["content-length"].to_i)/1024/1000) %> MB)
+                                <% end %></h5>
+          <p>
+            <%= sanitize e.description.html_safe, scrubber: AmpScrubber.new %>
+          </p>
+          <amp-audio controls>
+            <source src="<%= e.audiourl.to_s.gsub("http://", "https://") %>" type="audio/mp3">
+          </amp-audio>
+          <p>
+            <button>
+              <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>Read More<% end %>
+            </button>
+          </p>
+          <br />
+<% end %>

@@ -1,0 +1,147 @@
+
+<div class="alert alert-info dismissable"><i class="fa fa-exclamation-triangle"></i> All fields are required. Remember that MP3 files should be 64kbps!</div>
+<div class="col-md-12">
+  <% if @episode.audiourl? %>
+    <label class="">Current Audio</label>
+    <div class="pcast-player">
+      <div class="pcast-player-controls">
+        <button class="pcast-play"><i class="fa fa-play"></i><span>Play</span></button>
+        <button class="pcast-pause"><i class="fa fa-pause"></i><span>Pause</span></button>
+        <button class="pcast-rewind"><i class="fa fa-fast-backward"></i><span>Rewind</span></button>
+        <button class="pcast-download">
+          <%= link_to @episode.audiourl.to_s, title: "Download MP3" do %>
+            <i class="fa fa-download"></i><span>Download</span>
+          <% end %>
+        </button>
+        <span class="pcast-currenttime pcast-time">00:00</span>
+        <progress class="pcast-progress" value="0"></progress>
+        <span class="pcast-duration pcast-time">00:00</span>
+        <button class="pcast-speed">1x</button>
+        <button class="pcast-mute"><i class="fa fa-volume-up"></i><span>Mute/Unmute</span></button>
+      </div>
+      <audio preload="auto"><source src="<%= @episode.audiourl.to_s%>" type="audio/mpeg" /></audio>
+    </div>
+    <br />
+  <% end %>
+</div>
+<%= simple_form_for(@episode, multipart: true) do |f| %>
+  <%= f.error_notification %>
+    <div class="col-md-12">
+      <div class="clearfix">
+      </div>
+      <ul class="list-inline">
+        <li class="col-md-6">
+          <label name="podcast_id">Select A Podcast</label>
+          <% if current_user.admin? %>
+            <%= f.input :podcast_id, label: false do %>
+              <%= f.input :podcast_id, collection: @podcast.order(title: :asc).map { |r|
+                if Episode.where(podcast_id: r.id).count > 0
+                  [r.title, r.id.to_s, { class: r.id.to_s }, data: { podcast: Podcast.where(id: r.id).last.path.to_s, episode_number: Episode.where(podcast_id: r.id).last.episode.to_i + 1 }]
+                else
+                  [r.title, r.id.to_s, { class: r.id.to_s }, data: { podcast: Podcast.where(id: r.id).last.path.to_s, episode_number: 1 }]
+                end
+                 }, include_blank: true, label: false, input_html: { class: "form-control" } %>
+            <% end %>
+          <% else %>
+            <%= f.input :podcast_id, label: false do %>
+              <%= f.input :podcast_id, collection: @podcast.where(user_id: current_user.id).or(@podcast.where(user2_id: current_user.id)).or(@podcast.where(user3_id: current_user.id)).or(@podcast.where(producer_id: current_user.id)).order(title: :asc).map { |r|
+                if Episode.where(podcast_id: r.id).count > 0
+                  [r.title, r.id.to_s, { class: r.id.to_s }, data: { podcast: Podcast.where(id: r.id).last.path.to_s, episode_number: Episode.where(podcast_id: r.id).last.episode.to_i + 1 }]
+                else
+                  [r.title, r.id.to_s, { class: r.id.to_s }, data: { podcast: Podcast.where(id: r.id).last.path.to_s, episode_number: 1 }]
+                end
+                 }, include_blank: true, label: false, input_html: { class: "form-control" } %>
+            <% end %>
+          <% end %>
+        </li>
+        <li class="col-md-6">
+          <div class="control-group">
+            <div class="attach-set">
+              <label name="audiourl">Upload MP3</label>
+              <%= f.input :audiourl, as: :file, label: false, input_html: { style: "display: none;" } %>
+              <div style="margin-top: -14px !important;">
+                <input id="file-display" class="col-md-9" style="height: 37px !important;" disabled="disabled" type="text">
+                <a id="upload-btn" class="btn btn-primary btn-sm col-md-3" style="height: 37px !important; padding-top: 8px !important;"><i class="fa fa-upload"></i> Browse</a>
+              </div>
+            </div> <!-- /attach-set -->
+          </div> <!-- /control-group -->
+        </li>
+
+      </ul>
+      <ul class="list-inline">
+        <% if action_name == "new" %>
+          <%= f.input :episode, as: :hidden, label: false %>
+          <li class="col-md-12">
+            <label name="podcast_id">Episode Title</label>
+            <%= f.input :title, label: false%>
+          </li>
+        <% else %>
+          <li class="col-md-2">
+            <label name="podcast_id">Episode</label>
+            <%= f.input :episode, label: false %>
+          </li>
+          <li class="col-md-10">
+            <label name="podcast_id">Episode Title</label>
+            <%= f.input :title, label: "Episode Title" %>
+          </li>
+        <% end %>
+      </ul>
+      <div class="clearfix"></div>
+      <%= f.input :description, as: :hidden, label: false %>
+      <label class="control-label string required">Episode Description</label>
+      <trix-editor input="episode_description" rows="50"></trix-editor>
+      <div class="clearfix"><br /></div>
+      <%= f.input :path, as: :hidden, label: false %>
+      <ul class="list-inline">
+        <li class="col-md-2">
+          <label name="podcast_id">Explicit?</label>
+          <% if @episode.explicit? %>
+          <%= f.input :explicit, collection: ["Yes", "No"], selected: @episode.explicit, label: false, class: "form-control" %>
+          <% else %>
+            <%= f.input :explicit, collection: ["Yes", "No"], selected: "No", label: false, class: "form-control" %>
+          <% end %>
+        </li>
+        <!--
+        <li class="col-md-4">
+          <% if @episode.itunestype? %>
+          <%= f.input :itunestype, collection: ["Serial", "Episodic"], selected: @episode.itunestype, label: "Format:", class: "form-control" %>
+          <% else %>
+            <%= f.input :itunestype, collection: ["Serial", "Episodic"], selected: "Episodic", label: "Format:", class: "form-control" %>
+          <% end %>
+        </li> -->
+        <li class="col-md-3">
+          <label name="podcast_id">Episode Type</label>
+          <% if @episode.episodetype? %>
+            <%= f.input :episodetype, collection: ["Full", "Bonus"], selected: @episode.episodetype, label: false, class: "form-control" %>
+          <% else %>
+            <%= f.input :episodetype, collection: ["Full", "Bonus"], selected: "Full", label: false, class: "form-control" %>
+          <% end %>
+        </li>
+        <li class="col-md-7" id="published_status">
+          <label name="podcast_id">Publishing Status</label>
+          <% if @episode.status? %>
+          <%= f.input :status, collection: ["Published", "Scheduled", "Draft"],
+                               selected: @episode.status,
+                               label: false,
+                               class: "form-control",
+                               onclick: "toggle('hidden')" %>
+          <% else %>
+            <%= f.input :status, collection: ["Published", "Scheduled", "Draft"],
+                                 selected: "Published", label: false, class: "form-control", onclick: "toggle('hidden')" %>
+          <% end %>
+        </li>
+      </ul>
+      <div class="col-md-8" style="margin-left: -15px;" id="published_date" style='display:none !important;' >
+          <label name="podcast_id">Select Publishing Date</label>
+          <%= f.input :published_on, label: false %>
+      </div>
+      <div class="clearfix"><br /></div>
+      <div id="create-button" class="form-button">
+        <%= f.button :submit, class: "btn btn-primary col-md-12 col-sm-12 col-xs-12", data: {disable_with: "Saving..."} %>
+      </div>
+
+    </div>
+<% end %>
+<div class="clearfix">
+  <br />
+</div>

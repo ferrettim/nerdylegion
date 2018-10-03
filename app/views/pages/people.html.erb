@@ -1,0 +1,61 @@
+<% meta_title "People | The Nerdy Legion Podcast Network" %>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <% @users.each do |u| %>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <% if u.imageurl? %>
+              <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: u.imageurl.to_s }, alt: u.name, width: "100%;", style: "height: 180px" %>
+            <% else %>
+              <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: "https://nl1.nyc3.digitaloceanspaces.com/assets/nouserlogo.gif" }, alt: u.name, width: "100%;", style: "height: 180px" %>
+            <% end %>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+            <h4><%= u.name %></h4>
+            <strong>Podcasts: </strong>
+                <% if Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).count > 2 %>
+                  <% Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).order(title: :asc).each do |p| %>
+                      <% if p == Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).order(title: :asc).last %>
+                        and
+                        <%= link_to p, title: p.title do %>
+                          <%= p.title.to_s %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to p, title: p.title do %>
+                          <%= p.title.to_s + "," %>
+                        <% end %>
+                      <% end %>
+                  <% end %>
+                  <% elsif Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).count == 2 %>
+                    <% Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).order(title: :asc).each do |p| %>
+                        <% if p == Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).order(title: :asc).last %>
+                          and
+                          <%= link_to p, title: p.title do %>
+                            <%= p.title.to_s %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to p, title: p.title do %>
+                            <%= p.title.to_s %>
+                          <% end %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                  <% Podcast.where(user_id: u.id).or(Podcast.where(user2_id: u.id)).or(Podcast.where(user3_id: u.id)).or(Podcast.where(producer_id: u.id)).order(title: :asc).each do |p| %>
+                    <%= link_to p, title: p.title do %>
+                      <%= p.title.to_s %>
+                    <% end %>
+                  <% end %>
+              <% end %>
+            <br />
+            <br />
+            <% if u.twitter? %>
+              <%= link_to "Follow me on Twitter!", "https://www.twitter.com/" + u.twitter, class: "btn btn-info btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

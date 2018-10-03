@@ -1,0 +1,57 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="body-header">
+        Subscription Options
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p>Enjoy the shows? Then why not subscribe? Below you'll find different ways to get your favorite Nerdy Legion podcasts which are all available in different platforms such as Apple Podcasts, Google Play, Sticher and TuneIn or the good old fashioned way via an RSS feed.</p>
+      <p>If you want to subscribe to all the shows, feel free subscribe to the network feed via <%= link_to "RSS feed", "https://nerdylegion.com/episodes.rss" %>, <%= link_to "Apple Podcasts", "https://itunes.apple.com/us/podcast/nerdy-legion-podcast-network/id1041737614?mt=2", title: "Apple Podcasts" %> or <%= link_to "Google Play", "https://playmusic.app.goo.gl/?ibi=com.google.PlayMusic&isi=691797987&ius=googleplaymusic&apn=com.google.android.music&link=https://play.google.com/music/m/I6eibh62qp5pxtioxui5d36nkem?t%3DNerdy_Legion_Podcast_Network%26pcampaignid%3DMKT-na-all-co-pr-mu-pod-16", title: "Google Play" %>.</p>
+      <% @podcasts.each do |p| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h5 class="body-header">
+              <%= link_to p.title.to_s, p, title: p.title.to_s %>
+            </h5>
+            <div class="col-md-12">
+              <div class="col-md-2">
+                <%= image_tag p.logourl, alt: p.title.to_s, width: "100%", style: "padding-top: 15px;" %>
+              </div>
+              <div class="col-md-10">
+                <p><%= p.description.html_safe %></p>
+                <p><%= p.title.to_s %> has released <strong><%= p.episodes.count %> episodes</strong> since launching on <%= p.created_at.strftime("%b %m, %Y") %></p>
+                <ul class="list-inline">
+                  <li><strong>Subscribe:</strong></li>
+                  <% if p.itunes? %>
+                    <li><%= link_to p.itunes, target: "_blank", rel: "noopener" do %>
+                      Apple Podcasts<% end %></li>
+                  <% end %>
+                  <% if p.google? %>
+                    <li><%= link_to p.google, target: "_blank", rel: "noopener" do %>
+                      Google Play<% end %></li>
+                  <% end %>
+                  <% if p.stitcher? %>
+                    <li><%= link_to p.stitcher, target: "_blank", rel: "noopener" do %>
+                      Stitcher<% end %></li>
+                  <% end %>
+                  <% if p.tunein? %>
+                    <li><%= link_to p.tunein, target: "_blank", rel: "noopener" do %>
+                      TuneIn<% end %></li>
+                  <% end %>
+                  <% if p.youtube? %>
+                    <li><%= link_to p.youtube, target: "_blank", rel: "noopener" do %>
+                      YouTube<% end %></li>
+                  <% end %>
+                  <li><%= link_to root_url + "podcasts/" + p.slug.to_s + ".rss" do %>
+                    RSS<% end %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="clearfix"><br /></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

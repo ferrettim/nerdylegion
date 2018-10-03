@@ -1,0 +1,122 @@
+<% meta_title @episode.podcast.title + " Ep " + @episode.episode.to_s + ": " + @episode.title.titleize %>
+<% meta_description strip_tags(@episode.description.truncate(160, separator: ' ')) %>
+<% og_title @episode.podcast.title + " Ep " + @episode.episode.to_s + ": " + @episode.title.titleize %>
+<% og_description strip_tags(@episode.description.truncate(160, separator: ' ')) %>
+<% og_type "website" %>
+<% og_audio @episode.audiourl.to_s %>
+<% og_url root_url + "episodes/" + @episode.slug.to_s %>
+<% og_image @episode.podcast.logourl.to_s %>
+
+<div class="col-md-12">
+  <div class="col-md-9 col-sm-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= link_to @episode.podcast, title: @episode.podcast.title do %>
+          <div class="panel-title"><%= @episode.podcast.title %>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-body">
+
+        <div class="col-md-3 col-xs-12 hidden-sm">
+          <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "100%;" %>
+
+          <div class="clearfix"></div>
+        </div>
+        <div class="col-md-9 col-sm-12">
+          <h4 class="body-header"><% if @episode.episodetype == "Bonus" %>BONUS:<% end %> <%= @episode.title.titleize %></h4>
+            <p class="small muted" style="padding-top: 5px;"><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %> &nbsp;&nbsp; <i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %> &nbsp;&nbsp; <i class="fa fa-music"></i> <%= @episode.download_size %> MB</p>
+
+          <p>
+            <%= @episode.description.html_safe %>
+          </p>
+            <p>You can support this show by visiting our <%= link_to "merch store", "https://nerdylegion.threadless.com", target: "_blank", title: "Threadless" %>
+              <% if @episode.podcast.patreon? %>
+                , <%= link_to "directly through Patreon", @episode.podcast.patreon.to_s, target: "_blank", title: "Patreon" %>,
+              <% end %>
+               or by leaving us an
+              <%= link_to "Apple Podcasts review", @episode.podcast.itunes, title: "Apple Podcasts review", target: "_blank", rel: "noopener" %>.
+              <% if @episode.podcast.twitter? %>
+                Feel free to get in touch with us on Twitter,<%= link_to "@" + @episode.podcast.twitter, "https://www.twitter.com/" + @episode.podcast.twitter, title: "Twitter" %>, or by <%= mail_to @episode.podcast.email, "sending us an e-mail", subject: "Re: Ep" + @episode.episode.to_s + " of " + @episode.podcast.title, title: "Contact us", encode: "hex", target: "_blank", rel: "noopener" %>.
+              <% else %>
+                Also, feel free to get in touch with us by <%= mail_to @episode.podcast.email, "sending us an e-mail", subject: "Re: Ep" + @episode.episode.to_s + " of " + @episode.podcast.title, title: "Contact us", encode: "hex", target: "_blank", rel: "noopener" %>.
+              <% end %>
+          </p>
+
+
+        <div class="clearfix"></div>
+
+        </div>
+        <div class="col-md-12">
+          <ul class="list-inline">
+            <br />
+            <li><strong>Subscribe:</strong></li>
+            <% if @episode.podcast.itunes? %>
+              <li><%= link_to @episode.podcast.itunes, target: "_blank", rel: "noopener" do %>
+                Apple Podcasts<% end %></li>
+            <% end %>
+            <% if @episode.podcast.google? %>
+              <li><%= link_to @episode.podcast.google, target: "_blank", rel: "noopener" do %>
+                Google Play<% end %></li>
+            <% end %>
+            <% if @episode.podcast.stitcher? %>
+              <li><%= link_to @episode.podcast.stitcher, target: "_blank", rel: "noopener" do %>
+                Stitcher<% end %></li>
+            <% end %>
+            <% if @episode.podcast.tunein? %>
+              <li><%= link_to @episode.podcast.tunein, target: "_blank", rel: "noopener" do %>
+                TuneIn<% end %></li>
+            <% end %>
+            <% if @episode.podcast.youtube? %>
+              <li><%= link_to @episode.podcast.youtube, target: "_blank", rel: "noopener" do %>
+                YouTube<% end %></li>
+            <% end %>
+            <li><%= link_to root_url + "podcasts/" + @episode.podcast.slug.to_s + ".rss" do %>
+              RSS<% end %></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <div class="pcast-player">
+          <div class="pcast-player-controls">
+            <button class="pcast-play"><i class="fa fa-play"></i><span>Play</span></button>
+            <button class="pcast-pause"><i class="fa fa-pause"></i><span>Pause</span></button>
+            <button class="pcast-rewind"><i class="fa fa-fast-backward"></i><span>Rewind</span></button>
+            <button class="pcast-download">
+              <%= link_to @episode.audiourl.to_s, title: "Download MP3", download: @episode.audiourl.to_s, class: "track_downloads", data: { podcast: @episode.podcast.title.to_s, episode: @episode.episode.to_s, title: @episode.title.to_s, value: @episode.podcast.title.to_s + " Ep " + @episode.episode.to_s } do %>
+                <i class="fa fa-download"></i><span>Download</span>
+              <% end %>
+            </button>
+            <span class="pcast-currenttime pcast-time">00:00</span>
+            <progress class="pcast-progress" value="0"></progress>
+            <span class="pcast-duration pcast-time">00:00</span>
+            <button class="pcast-speed">1x</button>
+            <button class="pcast-mute"><i class="fa fa-volume-up"></i><span>Mute/Unmute</span></button>
+          </div>
+          <audio preload="auto"><source src="<%= @episode.audiourl.to_s %>" type="audio/mpeg" /></audio>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <% unless @previous.blank? %>
+        <div class="pull-left">
+          <%= link_to @previous do %>
+            <span class="btn btn-primary btn-sm hidden-md hidden-lg"><i class="fa fa-chevron-left"></i> Previous</span>
+            <span class="btn btn-primary hidden-xs hidden-sm"><i class="fa fa-chevron-left"></i> Previous Episode</span>
+          <% end %>
+        </div>
+      <% end %>
+      <% unless @next.blank? %>
+        <div class="pull-right">
+          <%= link_to @next do %>
+            <span class="btn btn-primary btn-sm hidden-md hidden-lg">Next <i class="fa fa-chevron-right"></i></span>
+            <span class="btn btn-primary hidden-xs hidden-sm">Next Episode <i class="fa fa-chevron-right"></i></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render "pages/sidebar" %>
+</div>

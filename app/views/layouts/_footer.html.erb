@@ -1,0 +1,15 @@
+<div class="clearfix"><br /></div>
+<nav class="navbar navbar-footer">
+  <div class="container-fluid">
+    <div class="navbar-footer text-center">
+      <ul class="list-inline small">
+        <li>Nerdy Legion &copy; <%= Time.now.strftime("%Y") %></li>
+        <li><%= link_to "Privacy", privacy_path, title: "Privacy Policy" %></li>
+        <li><%= link_to "Terms", terms_path, title: "Terms and Conditions" %></li>
+        <% unless user_signed_in? %>
+          <li><%= link_to "Login", new_user_session_path, title: "Login" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,31 @@
+<% meta_title "Podcasts | The Nerdy Legion Podcast Network" %>
+
+<div class="col-md-12">
+  <% @podcasts.each do |p| %>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="fill">
+          <%= link_to p, title: p.title do %>
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: p.logourl.to_s }, alt: p.description, width: "100%" %>
+          <% end %>
+        </div>
+        <div class="panel-body">
+              <p>
+                <% if p.episodes.count > 0 %>
+                  <span class="muted">
+                    Updated <%= p.episodes.last.published_on.strftime("%b %d, %Y") %>
+                  </span>
+                <% else %>
+                  <span class="muted">
+                    Coming soon!
+                  </span>
+                <% end %>
+                <span class="pull-right">
+                  <%= link_to "More", p, title: p.title %>
+                </span>
+              </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
