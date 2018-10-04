@@ -49,6 +49,7 @@ Rails.application.configure do
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
+  config.require_master_key = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
