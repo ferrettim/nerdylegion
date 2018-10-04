@@ -8,22 +8,10 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.2.0'
 gem 'bootsnap', require: false
 gem 'serviceworker-rails'
 gem 'lograge'
-group :development do
-  gem "better_errors"
-  gem "binding_of_caller"
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-  gem 'capistrano',         require: false
-  gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma',   require: false
-  gem 'capistrano-sidekiq', require: false
-end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -62,7 +50,6 @@ gem 'carrierwave', '~> 1.0'
 gem 'carrierwave_backgrounder', :git => 'https://github.com/lardawge/carrierwave_backgrounder.git'
 gem 'aws-sdk', '~> 2.3'
 gem 'fog-aws'
-gem 'fog-digitalocean'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # Friendly id
@@ -96,6 +83,16 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+  gem 'capistrano-sidekiq', require: false
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
