@@ -106,6 +106,10 @@
                 <li><%= link_to @podcast.google, target: "_blank", rel: "noopener" do %>
                   Google Play<% end %></li>
               <% end %>
+              <% if @podcast.spotify? %>
+                <li><%= link_to @podcast.spotify, target: "_blank", rel: "noopener" do %>
+                  Spotify<% end %></li>
+              <% end %>
               <% if @podcast.stitcher? %>
                 <li><%= link_to @podcast.stitcher, target: "_blank", rel: "noopener" do %>
                   Stitcher<% end %></li>

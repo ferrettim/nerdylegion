@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_033903) do
+ActiveRecord::Schema.define(version: 2018_10_06_012427) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2018_08_07_033903) do
     t.integer "average"
     t.string "youtube"
     t.integer "subscribers", default: 0
+    t.string "spotify"
     t.index ["producer_id"], name: "index_podcasts_on_producer_id"
     t.index ["slug"], name: "index_podcasts_on_slug", unique: true
     t.index ["title", "published_on", "status"], name: "index_podcasts_on_title_and_published_on_and_status"
