@@ -31,6 +31,10 @@
                     <li><%= link_to p.google, target: "_blank", rel: "noopener" do %>
                       Google Play<% end %></li>
                   <% end %>
+                  <% if p.spotify? %>
+                    <li><%= link_to p.spotify, target: "_blank", rel: "noopener" do %>
+                      Spotify<% end %></li>
+                  <% end %>
                   <% if p.stitcher? %>
                     <li><%= link_to p.stitcher, target: "_blank", rel: "noopener" do %>
                       Stitcher<% end %></li>
