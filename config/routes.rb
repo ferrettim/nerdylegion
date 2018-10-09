@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get 'subscribe' => 'pages#subscribe', as: :subscribe
   get 'analytics' => 'pages#analytics', as: :analytics
   get 'sitemap.xml', :to => 'pages#sitemap', :defaults => { :format => 'xml' }
+  get 'robots.:format' => 'pages#robots'
   get 'digitalocean' => 'pages#digitalocean'
   get 'audible' => 'pages#audible'
   get 'membership' => 'pages#membership'

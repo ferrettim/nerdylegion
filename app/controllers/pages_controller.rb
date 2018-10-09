@@ -60,10 +60,17 @@ class PagesController < ApplicationController
   end
 
   def sitemap
-    @static_pages = [privacy_path, about_path, people_path]
-    @episodes = Episode.all
+    @static_pages = [privacy_path, terms_path, hosts_path]
+    @episodes = Episode.where(status: "Published")
     respond_to do |format|
       format.xml
+    end
+  end
+
+  def robots
+    expires_in 6.hours, public: true
+    respond_to do |format|
+      format.text
     end
   end
 

@@ -1,0 +1,17 @@
+<% if Rails.env.production? %>
+  User-Agent: *
+  Allow: /
+  Disallow: /login
+  Disallow: /analytics
+  Disallow: /episodes/new
+  Disallow: /episodes/edit
+  Disallow: /podcasts/new
+  Disallow: /podcasts/edit
+  Disallow: /pending
+  Disallow: /sidekiq
+  Disallow: /edit
+  Sitemap: https://nerdylegion.com/sitemap.xml
+<% else %>
+  User-Agent: *
+  Disallow: /
+<% end %>
