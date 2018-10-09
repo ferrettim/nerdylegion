@@ -17,7 +17,7 @@
       </div>
       <div class="panel-body">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="pull-left" style="padding: 0 15px 5px 0;">
+          <div class="pull-left col-md-3 col-sm-3 col-xs-6" style="padding: 0 15px 5px 0;">
             <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title}", width: "100%;" %>
             <% if user_signed_in? && current_user.podcaster? %>
               <br />
@@ -61,7 +61,7 @@
               <% end %>
             <% end %>
           </div>
-            <p style="margin-top: -15px;">
+            <p class="col-md-9 col-sm-9 col-xs-6" style="margin-top: -15px;">
               <%= @podcast.description.html_safe %>
             </p>
               <p><%= @podcast.title %> is hosted by
@@ -95,7 +95,7 @@
           <div class="clearfix"></div>
           <div class="col-md-12">
             <ul class="list-inline">
-              <li><strong>Subscribe:</strong></li>
+              <li style="margin-left: -15px;"><strong>Subscribe:</strong></li>
               <% if @podcast.itunes? %>
                 <li><%= link_to @podcast.itunes, target: "_blank", rel: "noopener" do %>
                   Apple Podcasts<% end %></li>
@@ -140,13 +140,13 @@
 
           </div>
           <div class="panel-body">
-            <div class="col-md-12">
-              <div class="pull-left">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="pull-left col-md-2 col-sm-4 col-xs-6" style="margin-left: -15px;">
                 <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
-                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "90%;" %>
+                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "100%;" %>
                 <% end %>
               </div>
-              <p style="margin-top: -15px;">
+              <p class="col-md-10 col-sm-8 col-xs-6" style="margin-top: -15px;">
                 <%= e.description.html_safe %>
               </p>
             </div>
