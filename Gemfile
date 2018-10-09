@@ -35,7 +35,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # User auth
 gem 'devise'
-gem 'omniauth-facebook'
 # Bootstrap
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'jquery-rails'

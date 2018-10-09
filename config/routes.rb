@@ -37,10 +37,10 @@ Rails.application.routes.draw do
   get 'shows/marvelpodcast' => redirect('/podcasts/ump')
   get 'shows/vcp' => redirect('/podcasts/vcp')
   get 'shows/whatdidyouwatchthisweek' => redirect('/podcasts/wdyw')
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callback" }, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
+  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callback" }, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
   root :to => 'episodes#index'
-  get 'people' => 'pages#people', as: :people
-  get 'about' => 'pages#about', as: :about
+  get 'hosts' => 'pages#hosts', as: :hosts
   get 'privacy' => 'pages#privacy', as: :privacy
   get 'terms' => 'pages#terms', as: :terms
   get 'subscribe' => 'pages#subscribe', as: :subscribe

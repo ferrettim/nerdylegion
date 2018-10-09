@@ -6,7 +6,7 @@
 <% og_url root_url + "podcasts/" + @podcast.slug.to_s %>
 <% og_image @podcast.logourl.to_s if @podcast.logourl? %>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="col-md-12 box">
   <div class="col-md-9 col-sm-9 col-xs-12">
 
     <div class="panel panel-default">
@@ -16,34 +16,35 @@
         </h2>
       </div>
       <div class="panel-body">
-          <div class="col-md-3 hidden-sm hidden-xs">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="pull-left" style="padding: 0 15px 5px 0;">
             <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title}", width: "100%;" %>
             <% if user_signed_in? && current_user.podcaster? %>
               <br />
               <% if current_user.admin? %>
                 <%= link_to edit_podcast_path(@podcast.id),
-                          class: "btn btn-primary btn-xs col-md-12",
+                          class: "btn btn-primary btn-xs col-md-12 col-sm-12 col-xs-12",
                           title: "Edit podcast" do %>
                           Edit Podcast
                 <% end %>
               <% else %>
                 <% if current_user.id == @podcast.user_id %>
                   <%= link_to edit_podcast_path(@podcast.id),
-                            class: "btn btn-primary btn-xs col-md-12",
+                            class: "btn btn-primary btn-xs col-md-12 col-sm-12 col-xs-12",
                             title: "Edit podcast" do %>
                             Edit Podcast
                   <% end %>
                 <% end %>
                 <% if current_user.id == @podcast.user2_id %>
                   <%= link_to edit_podcast_path(@podcast.id),
-                            class: "btn btn-primary btn-xs col-md-12",
+                            class: "btn btn-primary btn-xs col-md-12 col-sm-12 col-xs-12",
                             title: "Edit podcast" do %>
                             Edit Podcast
                   <% end %>
                 <% end %>
                 <% if current_user.id == @podcast.user3_id %>
                   <%= link_to edit_podcast_path(@podcast.id),
-                            class: "btn btn-primary btn-xs col-md-12",
+                            class: "btn btn-primary btn-xs col-md-12 col-sm-12 col-xs-12",
                             title: "Edit podcast" do %>
                             Edit Podcast
                   <% end %>
@@ -51,7 +52,7 @@
                 <% unless current_user.id == @podcast.user_id && @podcast.producer_id %>
                   <% if current_user.id == @podcast.producer_id %>
                     <%= link_to edit_podcast_path(@podcast.id),
-                              class: "btn btn-primary btn-xs col-md-12",
+                              class: "btn btn-primary btn-xs col-md-12 col-sm-12 col-xs-12",
                               title: "Edit podcast" do %>
                               Edit Podcast
                     <% end %>
@@ -60,8 +61,7 @@
               <% end %>
             <% end %>
           </div>
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <p>
+            <p style="margin-top: -15px;">
               <%= @podcast.description.html_safe %>
             </p>
               <p><%= @podcast.title %> is hosted by
@@ -92,8 +92,6 @@
                 or feel free to get in touch with us <% if @podcast.twitter? %>via Twitter, <%= link_to "@" + @podcast.twitter, "https://www.twitter.com/" + @podcast.twitter, title: "Twitter", target: "_blank", rel: "noopener" %>,<% end %> by <%= mail_to @podcast.email, "sending us an e-mail", subject: @podcast.title, title: "Contact us", encode: "hex" %>.
               </p>
               <p><%= @podcast.title.to_s %> has released <strong><%= @podcast.episodes.count %> episodes</strong> since launching on <%= @podcast.created_at.strftime("%b %m, %Y") %></p>
-
-          </div>
           <div class="clearfix"></div>
           <div class="col-md-12">
             <ul class="list-inline">
@@ -126,6 +124,7 @@
                 RSS<% end %></li>
             </ul>
           </div>
+        </div>
       </div>
     </div>
 
@@ -141,13 +140,15 @@
 
           </div>
           <div class="panel-body">
-            <div class="col-md-2">
-              <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
-                <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "100%;" %>
-              <% end %>
-            </div>
-            <div class="col-md-10">
-              <%= e.description.html_safe %>
+            <div class="col-md-12">
+              <div class="pull-left">
+                <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
+                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "90%;" %>
+                <% end %>
+              </div>
+              <p style="margin-top: -15px;">
+                <%= e.description.html_safe %>
+              </p>
             </div>
           </div>
           <div class="panel-footer">

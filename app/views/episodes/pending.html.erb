@@ -19,7 +19,7 @@
         <% @episodes.each do |e| %>
           <% if e.podcast.user_id == current_user.id || e.podcast.user2_id == current_user.id || e.podcast.user3_id == current_user.id || e.podcast.producer_id == current_user.id || current_user.admin? %>
             <tr>
-              <td><%= image_tag e.podcast.logourl.thumb, width: "25px", alt: e.podcast.title %></td>
+              <td><%= image_tag e.podcast.logourl.thumb.to_s, width: "25px", alt: e.podcast.title %></td>
               <td><%= e.podcast.title %></td>
               <td><%= e.episode.to_s %></td>
               <td><%= e.title %></td>

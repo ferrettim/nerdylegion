@@ -2,8 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :imageurl, UserUploader
   validate :validate_invite, :on => :create
@@ -27,9 +26,9 @@ class User < ApplicationRecord
     end
   end
 
-  def link_account_from_omniauth(auth)
-    self.provider = auth.provider
-    self.uid = auth.uid
-    self.save
-  end
+#  def link_account_from_omniauth(auth)
+#    self.provider = auth.provider
+#    self.uid = auth.uid
+#    self.save
+#  end
 end

@@ -2,10 +2,7 @@ class PagesController < ApplicationController
   layout nil, :only => [:sitemap]
   before_action :authenticate_user!, only: [:analytics]
 
-  def about
-  end
-
-  def people
+  def hosts
     @users = User.where(podcaster: true).order(name: :asc)
   end
 

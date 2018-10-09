@@ -73,7 +73,7 @@
       <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js", "chartkick" %>
     <% end %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: Rails.env.production?, defer: true %>
-    
+
     <link rel="manifest" href="/manifest.json" />
   </head>
 
@@ -96,8 +96,6 @@
   <% else %>
     <body class="container track_body" %>
   <% end %>
-
-    <div id="fb-root"></div>
 
     <%= render 'layouts/header' %>
     <% flash.each do |name, msg| %>

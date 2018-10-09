@@ -33,15 +33,6 @@
       <%= f.email_field :email, class: "form-control" %>
     </div>
 
-    <div class="form-group">
-      <% if user_signed_in? && current_user.provider == "facebook" %>
-        <span class="btn btn-default col-md-12"><i class="fa fa-check"></i> Connected to Facebook</span>
-      <% else %>
-        <%= link_to "Connect Facebook Account", user_facebook_omniauth_authorize_path, class: "btn btn-info col-md-12" %>
-      <% end %>
-      <div class="clearfix"><br /></div>
-    </div>
-
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
@@ -61,7 +52,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.label :current_password %> <i>(required to confirm your changes)</i><br />
       <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
     </div>
 

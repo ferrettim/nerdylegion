@@ -7,7 +7,7 @@
 <% og_url root_url + "episodes/" + @episode.slug.to_s %>
 <% og_image @episode.podcast.logourl.to_s %>
 
-<div class="col-md-12">
+<div class="col-md-12 box">
   <div class="col-md-9 col-sm-9">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -17,16 +17,17 @@
         <% end %>
       </div>
       <div class="panel-body">
-
-        <div class="col-md-3 col-xs-12 hidden-sm">
-          <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "100%;" %>
-
-          <div class="clearfix"></div>
-        </div>
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="pull-left hidden-xs">
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;" %>
+            <div class="clearfix"></div>
+          </div>
           <h4 class="body-header"><% if @episode.episodetype == "Bonus" %>BONUS:<% end %> <%= @episode.title.titleize %></h4>
-            <p class="small muted" style="padding-top: 5px;"><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %> &nbsp;&nbsp; <i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %> &nbsp;&nbsp; <i class="fa fa-music"></i> <%= @episode.download_size %> MB</p>
-
+          <p class="small muted" style="padding-top: 5px;"><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %> &nbsp;&nbsp; <i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %></p>
+          <div class="pull-left visible-xs">
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;" %>
+            <div class="clearfix"></div>
+          </div>
           <p>
             <%= @episode.description.html_safe %>
           </p>

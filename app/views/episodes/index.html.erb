@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 box">
   <div class="col-md-9 col-sm-9">
     <% @episodes.each do |e| %>
         <div class="panel panel-default">
@@ -6,19 +6,23 @@
             <h2 class="body-header"><%= link_to e.podcast do %><%= e.podcast.title.titleize %><% end %></h2>
           </div>
           <div class="panel-body">
-            <div class="col-md-3">
-              <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
-                <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: e.podcast.logourl.small.to_s }, alt: e.podcast.title, class: "img-responsive", width: "100%;" %>
-              <% end %>
-            </div>
-            <div class="col-md-9">
-              <h3 class="body-header">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <span class="pull-left hidden-xs">
+                <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
+                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: e.podcast.logourl.small.to_s }, alt: e.podcast.title, class: "img-responsive", width: "90%;" %>
+                <% end %>
+              </span>
+              <h3 class="body-header" style="padding-bottom: 10px !important;">
                 <%= link_to e, title: e.title.titleize.to_s do %>
                   <% if e.episodetype == "Bonus" %>BONUS:<% end %> <%= e.title.titleize %>
                 <% end %>
               </h3>
-
-              <p>
+              <span class="pull-left visible-xs" style="width: 100px !important;">
+                <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
+                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: e.podcast.logourl.small.to_s }, alt: e.podcast.title, class: "img-responsive", width: "90%;" %>
+                <% end %>
+              </span>
+              <p class="pull-left">
                 <%= e.description.html_safe %>
               </p>
               <div class="cleafix"></div>
