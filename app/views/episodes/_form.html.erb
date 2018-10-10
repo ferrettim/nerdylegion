@@ -89,8 +89,15 @@
       <div class="clearfix"></div>
       <%= f.input :description, as: :hidden, label: false %>
       <label class="control-label string required">Episode Description</label>
-      <trix-editor input="episode_description" rows="50"></trix-editor>
+      <trix-editor input="episode_description" rows="25"></trix-editor>
       <div class="clearfix"><br /></div>
+
+      <%= f.input :shownotes, as: :hidden, label: false %>
+      <label class="control-label string required">Detailed Show Notes/Timestamps</label>
+      <trix-editor input="episode_shownotes" rows="50"></trix-editor>
+      <small>(Will only appear in episode page and podcast players)</small>
+      <div class="clearfix"><br /></div>
+
       <%= f.input :path, as: :hidden, label: false %>
       <ul class="list-inline">
         <li class="col-md-1 col-sm-3 col-xs-12">

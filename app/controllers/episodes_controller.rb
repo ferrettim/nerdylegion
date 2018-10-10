@@ -100,6 +100,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.require(:episode).permit(:podcast_id, :episode, :title, :description, :published_on, :status, :path, :audio, :audiourl, :download_size, :duration, :itunestype, :episodetype, :explicit)
+      params.require(:episode).permit(:podcast_id, :episode, :title, :description, :shownotes, :published_on, :status, :path, :audio, :audiourl, :download_size, :duration, :itunestype, :episodetype, :explicit)
     end
 end

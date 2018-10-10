@@ -63,10 +63,18 @@ xml.rss( :version=>"2.0", :"xmlns:atom"=>"http://www.w3.org/2005/Atom", :"xmlns:
           xml.enclosure( :url => article.audiourl.to_s, :length => "00:00", :type => "audio/mpeg" )
         end
         xml.itunes :duration, article.duration.to_s
-        if @podcast.patreon?
-          xml.description feedsum + "<br /><br /> You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + article.podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+        if article.shownotes?
+          if @podcast.patreon?
+            xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+          else
+            xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+          end
         else
-          xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + article.podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+          if @podcast.patreon?
+            xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+          else
+            xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+          end
         end
         xml.guid  root_url + "episodes/" + article.slug
       end

@@ -31,6 +31,11 @@
           <p>
             <%= @episode.description.html_safe %>
           </p>
+          <% if @episode.shownotes? %>
+            <p>
+              <%= @episode.shownotes.html_safe %>
+            </p>
+          <% end %>
             <p>You can support this show by visiting our <%= link_to "merch store", "https://nerdylegion.threadless.com", target: "_blank", title: "Threadless" %>
               <% if @episode.podcast.patreon? %>
                 , <%= link_to "directly through Patreon", @episode.podcast.patreon.to_s, target: "_blank", title: "Patreon" %>,

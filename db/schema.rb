@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_06_012427) do
+ActiveRecord::Schema.define(version: 2018_10_10_170430) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_10_06_012427) do
     t.string "episodetype"
     t.integer "thisweek", default: 0
     t.integer "thismonth", default: 0
+    t.text "shownotes"
     t.index ["published_on", "title", "status"], name: "index_episodes_on_published_on_and_title_and_status"
   end
 
