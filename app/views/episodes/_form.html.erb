@@ -76,8 +76,8 @@
               <label name="audiourl">Upload MP3</label>
               <%= f.input :audiourl, as: :file, label: false, input_html: { style: "display: none;" } %>
               <div style="margin-top: -14px !important;">
-                <input id="file-display" class="col-md-9" style="height: 37px !important;" disabled="disabled" type="text">
-                <a id="upload-btn" class="btn btn-primary btn-sm col-md-3" style="height: 37px !important; padding-top: 8px !important;"><i class="fa fa-upload"></i> Browse</a>
+                <input id="file-display" class="col-md-9 col-sm-9 col-xs-7" style="height: 37px !important;" disabled="disabled" type="text">
+                <a id="upload-btn" class="btn btn-primary btn-sm col-md-3 col-sm-3 col-xs-5" style="height: 37px !important; padding-top: 8px !important;"><i class="fa fa-upload"></i> Browse</a>
               </div>
             </div> <!-- /attach-set -->
           </div> <!-- /control-group -->
@@ -85,16 +85,18 @@
       </ul>
       <div class="clearfix"></div>
       <%= f.input :description, as: :hidden, label: false %>
+      <label name="description">Episode Description</label>
       <trix-editor input="episode_description" rows="25" placeholder="Enter your episode description here"></trix-editor>
       <div class="clearfix"><br /></div>
 
       <%= f.input :shownotes, as: :hidden, label: false %>
+      <label name="shownotes">Additional Notes</label>
       <trix-editor input="episode_shownotes" rows="50" placeholder="This field is NOT REQUIRED. If you want to enter detailed show notes such as a list of links or timestamps, enter them here. Detailed show notes will only appear in the episode page or when viewing an episode in a podcast player."></trix-editor>
       <div class="clearfix"><br /></div>
 
       <%= f.input :path, as: :hidden, label: false %>
       <ul class="list-inline">
-        <li class="col-md-2 col-sm-3 col-xs-12">
+        <li class="col-md-2 col-sm-4 col-xs-12">
           <label name="podcast_id">Explicit?</label>
           <% if @episode.explicit? %>
           <%= f.input :explicit, collection: ["Yes", "No"], selected: @episode.explicit, label: false, class: "form-control" %>

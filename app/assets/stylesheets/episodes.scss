@@ -54,7 +54,17 @@
   margin-top: -2px;
 }
 
+#trix-toolbar-1 .button_row {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
 
+#trix-toolbar-2 .button_row {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
 
 #action_button .show-on-hover:hover > ul.dropdown-menu {
     display: block;
