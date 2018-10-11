@@ -23,7 +23,13 @@ class EpisodesController < ApplicationController
   # GET /episodes/1.json
   def show
     if user_signed_in?
-      if current_user.id == @episode.podcast.user_id || @episode.podcast.user2_id || @episode.podcast.user3_id || @episode.podcast.producer_id
+      if current_user.admin?
+        @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
+        @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
+        unless user_signed_in? && current_user.podcaster?
+          ahoy.track "#{@episode.podcast.title.to_s}", episode: "#{@episode.episode.to_s}", title: "#{@episode.title.to_s}", value: "#{@episode.podcast.title.to_s} Ep #{@episode.episode.to_s}"
+        end
+      elsif current_user.id == @episode.podcast.user_id || @episode.podcast.user2_id || @episode.podcast.user3_id || @episode.podcast.producer_id
         @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
         @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
         unless user_signed_in? && current_user.podcaster?
