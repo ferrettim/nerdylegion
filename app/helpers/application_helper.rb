@@ -1,12 +1,16 @@
 module ApplicationHelper
   include Pagy::Frontend
-  
+
   def meta_title(page_title)
     content_for(:meta_title) { page_title }
   end
 
   def meta_description(page_text)
     content_for(:meta_description) { page_text }
+  end
+
+  def twitter_image(twitter_image)
+    content_for(:twitter_image) { twitter_image }
   end
 
   def og_title(og_title)

@@ -1,5 +1,6 @@
 <% meta_title @podcast.title.titleize %>
 <% meta_description strip_tags(@podcast.description.truncate(160, separator: ' ')) %>
+<% twitter_image @podcast.logourl.to_s if @podcast.logourl? %>
 <% og_title @podcast.title.titleize %>
 <% og_description strip_tags(@podcast.description.truncate(160, separator: ' ')) %>
 <% og_type "article" %>
@@ -97,30 +98,30 @@
             <ul class="list-inline">
               <li style="margin-left: -15px;"><strong>Subscribe:</strong></li>
               <% if @podcast.itunes? %>
-                <li><%= link_to @podcast.itunes, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.itunes, target: "_blank", rel: "noopener", title: "Apple Podcasts" do %>
                   Apple Podcasts<% end %></li>
               <% end %>
               <% if @podcast.google? %>
-                <li><%= link_to @podcast.google, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.google, target: "_blank", rel: "noopener", title: "Google Play" do %>
                   Google Play<% end %></li>
               <% end %>
               <% if @podcast.spotify? %>
-                <li><%= link_to @podcast.spotify, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.spotify, target: "_blank", rel: "noopener", title: "Spotify" do %>
                   Spotify<% end %></li>
               <% end %>
               <% if @podcast.stitcher? %>
-                <li><%= link_to @podcast.stitcher, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.stitcher, target: "_blank", rel: "noopener", title: "Stitcher" do %>
                   Stitcher<% end %></li>
               <% end %>
               <% if @podcast.tunein? %>
-                <li><%= link_to @podcast.tunein, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.tunein, target: "_blank", rel: "noopener", title: "TuneIn" do %>
                   TuneIn<% end %></li>
               <% end %>
               <% if @podcast.youtube? %>
-                <li><%= link_to @podcast.youtube, target: "_blank", rel: "noopener" do %>
+                <li><%= link_to @podcast.youtube, target: "_blank", rel: "noopener", title: "YouTube" do %>
                   YouTube<% end %></li>
               <% end %>
-              <li><%= link_to root_url + "podcasts/" + @podcast.slug.to_s + ".rss" do %>
+              <li><%= link_to root_url + "podcasts/" + @podcast.slug.to_s + ".rss", title: "RSS" do %>
                 RSS<% end %></li>
             </ul>
           </div>

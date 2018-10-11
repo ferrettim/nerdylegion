@@ -3,7 +3,7 @@
     <% @episodes.each do |e| %>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="body-header"><%= link_to e.podcast do %><%= e.podcast.title.titleize %><% end %></h2>
+            <h2 class="body-header"><%= link_to e.podcast, title: e.podcast.title.titleize do %><%= e.podcast.title.titleize %><% end %></h2>
           </div>
           <div class="panel-body">
             <div class="col-md-12 col-sm-12 col-xs-12">
