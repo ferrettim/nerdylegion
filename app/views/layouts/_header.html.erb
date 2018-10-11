@@ -72,6 +72,7 @@
                       <li class="col-md-9 col-sm-8">
                         <%= form_with url: search_path, local: true, method: :get, html: { id: "search_form" } do |form| %>
                           <%= form.text_field :q, placeholder: "Search", data: { behavior: "autocomplete" }, class: "form-control", id: "autocomplete" %>
+                          <%= submit_tag "", id: "submit_search", style: "display: none;" %>
                         <% end %>
                       </li>
                     </ul>

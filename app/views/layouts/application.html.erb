@@ -22,12 +22,12 @@
     <% if yield(:og_description).present? %>
       <meta name="twitter:description" content="<%= yield(:og_description) %>" />
     <% else %>
-      <meta name="twitter:description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+      <meta name="twitter:description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
     <% end %>
     <% if yield(:meta_description).present? %>
       <meta name="description" content="<%= yield(:meta_description) %>" />
     <% else %>
-      <meta name="description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+      <meta name="description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
     <% end %>
     <meta property="fb:app_id" content="<%= ENV['FB_APP_ID'] %>" />
     <% if yield(:og_title).present? %>
@@ -38,7 +38,7 @@
     <% if yield(:og_description).present? %>
       <meta property="og:description" content="<%= yield(:og_description) %>" />
     <% else %>
-      <meta property="og:description" content="The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more." />
+      <meta property="og:description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
     <% end %>
     <% if yield(:og_type).present? %>
       <meta property="og:type" content="<%= yield(:og_type) %>" />
@@ -124,25 +124,26 @@
 
     <%= yield %>
     <%= render 'layouts/footer' %>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://nerdylegion.com",
+      "image": "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg",
+      "description": "The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today.",
+      "contactPoint": [
+        { "@type": "ContactPoint",
+          "url": "https://nerdylegion.com",
+          "contactType": "customer service"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/nerdylegion",
+        "https://www.twitter.com/nerdylegion"
+      ]
+    }
+    </script>
   </body>
 
-  <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "url": "https://nerdylegion.com",
-    "image": "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg",
-    "description": "The Nerdy Legion podcast network is a place for people obsessed with geek culture with topics ranging from comics, TV, movies, wrestling and more.",
-    "contactPoint": [
-      { "@type": "ContactPoint",
-        "url": "https://nerdylegion.com",
-        "contactType": "customer service"
-      }
-    ],
-    "sameAs": [
-      "https://www.facebook.com/nerdylegion",
-      "https://www.twitter.com/nerdylegion"
-    ]
-  }
-  </script>
+
 </html>

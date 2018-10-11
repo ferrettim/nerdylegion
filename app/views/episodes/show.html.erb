@@ -20,13 +20,13 @@
       <div class="panel-body">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="pull-left hidden-xs">
-            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;" %>
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;", title: "Loading..." %>
             <div class="clearfix"></div>
           </div>
           <h4 class="body-header"><% if @episode.episodetype == "Bonus" %>BONUS:<% end %> <%= @episode.title.titleize %></h4>
           <p class="small muted" style="padding-top: 5px;"><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %> &nbsp;&nbsp; <i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %></p>
           <div class="pull-left visible-xs">
-            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;" %>
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;". title: "Loading..." %>
             <div class="clearfix"></div>
           </div>
           <p>

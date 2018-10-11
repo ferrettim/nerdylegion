@@ -19,7 +19,7 @@
       <div class="panel-body">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="pull-left col-md-3 col-sm-3 col-xs-6" style="padding: 0 15px 5px 0;">
-            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title}", width: "100%;" %>
+            <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title}", width: "100%;", title: "Loading..." %>
             <% if user_signed_in? && current_user.podcaster? %>
               <br />
               <% if current_user.admin? %>
@@ -144,7 +144,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="pull-left col-md-2 col-sm-4 col-xs-6" style="margin-left: -15px;">
                 <%= link_to e, title: e.podcast.title + " Ep " + e.episode.to_s + ": " +  e.title.titleize do %>
-                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "100%;" %>
+                  <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @podcast.logourl.to_s }, alt: "#{@podcast.title.titleize}", width: "100%;", title: "Loading..." %>
                 <% end %>
               </div>
               <p class="col-md-10 col-sm-8 col-xs-6" style="margin-top: -15px;">
