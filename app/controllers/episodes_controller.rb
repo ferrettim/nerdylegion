@@ -22,10 +22,42 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
-    @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
-    @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
-    unless user_signed_in? && current_user.podcaster?
-      ahoy.track "#{@episode.podcast.title.to_s}", episode: "#{@episode.episode.to_s}", title: "#{@episode.title.to_s}", value: "#{@episode.podcast.title.to_s} Ep #{@episode.episode.to_s}"
+    if user_signed_in?
+      if current_user.id == @episode.podcast.user_id || @episode.podcast.user2_id || @episode.podcast.user3_id || @episode.podcast.producer_id
+        @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
+        @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
+        unless user_signed_in? && current_user.podcaster?
+          ahoy.track "#{@episode.podcast.title.to_s}", episode: "#{@episode.episode.to_s}", title: "#{@episode.title.to_s}", value: "#{@episode.podcast.title.to_s} Ep #{@episode.episode.to_s}"
+        end
+      else
+        if @episode.status == "Scheduled"
+          redirect_to root_url
+          flash[:error] = "This episode of " + @episode.podcast.title.to_s + " won't be available until " + @episode.published_on.strftime("%b %m, %Y")
+        elsif @episode.status == "Draft"
+          redirect_to root_url
+          flash[:error] = "This episode cannot be viewed until published!"
+        else
+          @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
+          @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
+          unless user_signed_in? && current_user.podcaster?
+            ahoy.track "#{@episode.podcast.title.to_s}", episode: "#{@episode.episode.to_s}", title: "#{@episode.title.to_s}", value: "#{@episode.podcast.title.to_s} Ep #{@episode.episode.to_s}"
+          end
+        end
+      end
+    else
+      if @episode.status == "Scheduled"
+        redirect_to root_url
+        flash[:error] = "This episode of " + @episode.podcast.title.to_s + " won't be available until " + @episode.published_on.strftime("%b %m, %Y")
+      elsif @episode.status == "Draft"
+        redirect_to root_url
+        flash[:error] = "This episode cannot be viewed until published!"
+      else
+        @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first
+        @next = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode + 1).first
+        unless user_signed_in? && current_user.podcaster?
+          ahoy.track "#{@episode.podcast.title.to_s}", episode: "#{@episode.episode.to_s}", title: "#{@episode.title.to_s}", value: "#{@episode.podcast.title.to_s} Ep #{@episode.episode.to_s}"
+        end
+      end
     end
   end
 
