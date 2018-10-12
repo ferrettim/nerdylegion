@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callback" }, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
   root :to => 'episodes#index'
-  get 'hosts' => 'pages#hosts', as: :hosts
   get 'privacy' => 'pages#privacy', as: :privacy
   get 'terms' => 'pages#terms', as: :terms
   get 'subscribe' => 'pages#subscribe', as: :subscribe
@@ -49,6 +48,5 @@ Rails.application.routes.draw do
   get 'robots.:format' => 'pages#robots'
   get 'digitalocean' => 'pages#digitalocean'
   get 'audible' => 'pages#audible'
-  get 'membership' => 'pages#membership'
   get '*path' => redirect('/')
 end

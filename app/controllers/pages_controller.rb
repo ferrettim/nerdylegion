@@ -2,10 +2,6 @@ class PagesController < ApplicationController
   layout nil, :only => [:sitemap]
   before_action :authenticate_user!, only: [:analytics]
 
-  def hosts
-    @users = User.where(podcaster: true).order(name: :asc)
-  end
-
   def privacy
   end
 
@@ -78,9 +74,6 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.text
     end
-  end
-
-  def membership
   end
 
   def digitalocean

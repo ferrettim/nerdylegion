@@ -50,9 +50,11 @@
                             <% end %>
                         </ul>
                       </li>
-                      <li><%= link_to "Hosts", hosts_path, title: "Hosts" %></li>
                       <li><%= link_to "Subscribe", subscribe_path, title: "Subscribe" %></li>
                       <li class="visible-xs"><%= link_to "Shop", "https://nerdylegion.threadless.com/", target: "_blank", rel: "noopener", title: "Shop" %></li>
+                      <% unless user_signed_in? %>
+                        <li class="visible-xs"><%= link_to "Login", new_user_session_path, target: "_blank", rel: "noopener", title: "Login" %></li>
+                      <% end %>
                       <% if user_signed_in? %>
                           <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Admin">Admin <span class="caret"></span></a>
@@ -69,7 +71,7 @@
                       <% end %>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                      <li class="col-md-9 col-sm-8">
+                      <li class="col-md-9 col-sm-8 col-xs-6">
                         <%= form_with url: search_path, local: true, method: :get, html: { id: "search_form" } do |form| %>
                           <%= form.text_field :q, placeholder: "Search", data: { behavior: "autocomplete" }, class: "form-control", id: "autocomplete" %>
                           <%= submit_tag "", id: "submit_search", style: "display: none;" %>
