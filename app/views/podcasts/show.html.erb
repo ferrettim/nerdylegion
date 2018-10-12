@@ -92,7 +92,7 @@
                   <% end %>
                 or feel free to get in touch with us <% if @podcast.twitter? %>via Twitter, <%= link_to "@" + @podcast.twitter, "https://www.twitter.com/" + @podcast.twitter, title: "Twitter", target: "_blank", rel: "noopener" %>,<% end %> by <%= mail_to @podcast.email, "sending us an e-mail", subject: @podcast.title, title: "Contact us", encode: "hex" %>.
               </p>
-              <p><%= @podcast.title.to_s %> has released <strong><%= @podcast.episodes.count %> episodes</strong> since launching on <%= @podcast.created_at.strftime("%b %m, %Y") %></p>
+              <p><%= @podcast.title.to_s %> has released <strong><%= @podcast.episodes.where(status: "Published").count %> episodes</strong> since launching on <%= @podcast.created_at.strftime("%b %m, %Y") %></p>
           <div class="clearfix"></div>
           <div class="col-md-12">
             <ul class="list-inline">

@@ -12,7 +12,7 @@
 //
 //= require Chart.bundle
 //= require chartkick
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require rails-ujs
 //= require pagy
