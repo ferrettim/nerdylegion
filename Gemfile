@@ -43,7 +43,7 @@ gem 'bootstrap-select-rails'
 gem 'figaro'
 # Forms
 gem 'simple_form'
-gem 'trix'
+gem 'trix-rails', require: 'trix'
 # File uploads
 gem "mini_magick"
 gem 'carrierwave', '~> 1.0'

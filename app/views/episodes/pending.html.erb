@@ -40,7 +40,7 @@
             </tr>
           <% else %>
           <tr>
-            <td><%= image_tag e.podcast.logourl.thumb, width: "25px", alt: e.podcast.title %></td>
+            <td><%= image_tag e.podcast.logourl.thumb.to_s, width: "25px", alt: e.podcast.title %></td>
             <td><%= e.podcast.title %></td>
             <td><%= e.episode.to_s %></td>
             <td><%= e.title %></td>

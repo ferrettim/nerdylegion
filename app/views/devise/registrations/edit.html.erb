@@ -11,7 +11,7 @@
             <%= f.file_field :imageurl %>
           </div>
           <div class="col-md-2">
-            <%= image_tag current_user.imageurl, class: "img-responsive" %>
+            <%= image_tag current_user.imageurl.to_s, class: "img-responsive" %>
           </div>
       <% else %>
         <label name="image">Upload image</label>

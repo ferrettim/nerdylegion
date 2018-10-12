@@ -1,6 +1,3 @@
-<% if action_name == 'new' %>
-  <div class="alert alert-info"><i class="fa fa-exclamation-triangle"></i> All fields are required. Remember that MP3 files should be 64kbps!</div>
-<% end %>
 <div class="col-md-12">
   <% if @episode.audiourl? %>
     <label class="">Current Audio</label>
@@ -73,8 +70,8 @@
         <li class="col-md-6 col-sm-8 col-xs-12">
           <div class="control-group">
             <div class="attach-set">
-              <label name="audiourl">Upload MP3</label>
-              <%= f.input :audiourl, as: :file, label: false, input_html: { style: "display: none;" } %>
+              <label name="audiourl">Upload MP3 (64kpbs required)</label>
+              <%= f.input :audiourl, as: :file, label: false, input_html: { style: "display: none;" }, onsubmit: "uploadEpisode()"  %>
               <div style="margin-top: -14px !important;">
                 <input id="file-display" class="col-md-9 col-sm-9 col-xs-7" style="height: 37px !important;" disabled="disabled" type="text">
                 <a id="upload-btn" class="btn btn-primary btn-sm col-md-3 col-sm-3 col-xs-5" style="height: 37px !important; padding-top: 8px !important;"><i class="fa fa-upload"></i> Browse</a>
@@ -84,14 +81,12 @@
         </li>
       </ul>
       <div class="clearfix"></div>
-      <%= f.input :description, as: :hidden, label: false %>
       <label name="description">Episode Description</label>
-      <trix-editor input="episode_description" rows="25" placeholder="Enter your episode description here"></trix-editor>
+      <%= f.input :description, as: :trix_editor, label: false, placeholder: "Enter your episode description here" %>
       <div class="clearfix"><br /></div>
 
-      <%= f.input :shownotes, as: :hidden, label: false %>
       <label name="shownotes">Additional Notes</label>
-      <trix-editor input="episode_shownotes" rows="50" placeholder="This field is NOT REQUIRED. If you want to enter detailed show notes such as a list of links or timestamps, enter them here. Detailed show notes will only appear in the episode page or when viewing an episode in a podcast player."></trix-editor>
+      <%= f.input :shownotes, as: :trix_editor, label: false, placeholder: "This field is NOT REQUIRED. If you want to enter detailed show notes such as a list of links or timestamps, enter them here. Detailed show notes will only appear in the episode page or when viewing an episode in a podcast player." %>
       <div class="clearfix"><br /></div>
 
       <%= f.input :path, as: :hidden, label: false %>
