@@ -14,6 +14,12 @@ class PagesController < ApplicationController
 
   def subscribe
     @podcasts = Podcast.where(status: "Published").order(title: :asc)
+    @podcasts.each do |p|
+      @host = User.where(id: p.user_id)
+      @host2 = User.where(id: p.user2_id)
+      @host3 = User.where(id: p.user3_id)
+      @producer = User.where(id: p.producer_id)
+    end
   end
 
   def analytics
