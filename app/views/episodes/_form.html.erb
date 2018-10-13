@@ -28,21 +28,6 @@
       <div class="clearfix">
       </div>
       <ul class="list-inline">
-        <% if action_name == "new" %>
-          <%= f.input :episode, as: :hidden, label: false %>
-          <li class="col-md-12 col-sm-12 col-xs-12">
-            <label name="podcast_id">Episode Title</label>
-            <%= f.input :title, label: false%>
-          </li>
-        <% else %>
-          <li class="col-md-2">
-            <label name="podcast_id">Episode</label>
-            <%= f.input :episode, label: false %>
-          </li>
-          <li class="col-md-10">
-            <%= f.input :title, label: "Episode Title" %>
-          </li>
-        <% end %>
         <li class="col-md-6 col-sm-4 col-xs-12">
           <label name="podcast_id">Select A Podcast</label>
           <% if current_user.admin? %>
@@ -70,7 +55,7 @@
         <li class="col-md-6 col-sm-8 col-xs-12">
           <div class="control-group">
             <div class="attach-set">
-              <label name="audiourl">Upload MP3 (64kpbs required)</label>
+              <label name="audiourl">Upload MP3 (64kpbs <span class="hidden-xs">required</span>)</label>
               <%= f.input :audiourl, as: :file, label: false, input_html: { style: "display: none;" }, onsubmit: "uploadEpisode()"  %>
               <div style="margin-top: -14px !important;">
                 <input id="file-display" class="col-md-9 col-sm-9 col-xs-7" style="height: 37px !important;" disabled="disabled" type="text">
@@ -81,6 +66,23 @@
         </li>
       </ul>
       <div class="clearfix"></div>
+      <ul class="list-inline">
+        <% if action_name == "new" %>
+          <%= f.input :episode, as: :hidden, label: false %>
+          <li class="col-md-12 col-sm-12 col-xs-12">
+            <label name="podcast_id">Episode Title</label>
+            <%= f.input :title, label: false%>
+          </li>
+        <% else %>
+          <li class="col-md-2">
+            <label name="podcast_id">Episode</label>
+            <%= f.input :episode, label: false %>
+          </li>
+          <li class="col-md-10">
+            <%= f.input :title, label: "Episode Title" %>
+          </li>
+        <% end %>
+      </ul>
       <label name="description">Episode Description</label>
       <%= f.input :description, as: :trix_editor, label: false, placeholder: "Enter your episode description here" %>
       <div class="clearfix"><br /></div>
