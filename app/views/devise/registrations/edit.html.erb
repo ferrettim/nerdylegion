@@ -4,15 +4,16 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="form-group" style="margin-left: -15px;">
+    <div class="form-group">
       <% if current_user.imageurl? %>
-          <div class="col-md-10">
+          <div class="col-md-10" style="margin-left: -15px;">
             <label name="image">Upload image</label>
             <%= f.file_field :imageurl %>
           </div>
           <div class="col-md-2">
             <%= image_tag current_user.imageurl.to_s, class: "img-responsive" %>
           </div>
+          <div class="clearfix"><br /></div>
       <% else %>
         <label name="image">Upload image</label>
         <%= f.file_field :imageurl %>

@@ -8,6 +8,38 @@ class PagesController < ApplicationController
   def terms
   end
 
+  def user_admin
+    if user_signed_in? && current_user.admin?
+      @users = User.where.not(admin: true)
+      def podcaster_true
+        User.find(params[:id]).update_column(:podcaster, true)
+        redirect_to user_admin_path, :flash => { :success => "Success! User has been upgraded to podcaster!" }
+      end
+      def podcaster_false
+        User.find(params[:id]).update_column(:podcaster, false)
+        redirect_to user_admin_path, :flash => { :success => "Success! User is no longer a podcaster!" }
+      end
+      def analytics_true
+        User.find(params[:id]).update_column(:analytics, true)
+        redirect_to user_admin_path, :flash => { :success => "Success! User has been granted analytics access!" }
+      end
+      def analytics_false
+        User.find(params[:id]).update_column(:analytics, false)
+        redirect_to user_admin_path, :flash => { :success => "Success! User access to analytics has been revoked!" }
+      end
+      def admin_true
+        User.find(params[:id]).update_column(:admin, true)
+        redirect_to user_admin_path, :flash => { :success => "Success! User has been granted admin priviledges!" }
+      end
+      def admin_false
+        User.find(params[:id]).update_column(:admin, false)
+        redirect_to user_admin_path, :flash => { :success => "Success! User admin priviledges have been revoked!" }
+      end
+    else
+      redirect_to root_url
+    end
+  end
+
   def subscribe
     @podcasts = Podcast.where(status: "Published").order(title: :asc)
     @podcasts.each do |p|
@@ -19,7 +51,7 @@ class PagesController < ApplicationController
   end
 
   def analytics
-    if user_signed_in? && current_user.podcaster?
+    if user_signed_in? && current_user.analytics?
       @optionstitle = Podcast.where(status: "Published").order(title: :asc)
         if params[:name].present?
           @podcast = Podcast.where(status: "Published").where(title: params[:name]).first

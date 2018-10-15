@@ -1,0 +1,64 @@
+<div class="col-md-12 col-sm-12 col-xs-12 panel panel-default">
+    <h4 class="text-center">User Administration</h4>
+    <table class="table table-responsive table-condensed table-hover">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Last Seen</td>
+          <td class="text-center">Admin?</td>
+          <td class="text-center">Podcaster?</td>
+          <td class="text-center">Analytics?</td>
+        </tr>
+      </thead>
+      <% @users.find_each do |u| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= u.name %>
+            </td>
+            <td>
+              <%= u.email %>
+            </td>
+            <td>
+              <%= u.updated_at.strftime("%b %m, %Y") %>
+            </td>
+            <td class="text-center">
+              <% if u.admin? %>
+                <%= form_tag controller: 'pages', action: 'admin_false', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "True", class: "btn btn-success btn-xs col-md-12" %>
+                <% end %>
+              <% else %>
+                <%= form_tag controller: 'pages', action: 'admin_true', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "False", class: "btn btn-primary btn-xs col-md-12" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if u.podcaster? %>
+                <%= form_tag controller: 'pages', action: 'podcaster_false', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "True", class: "btn btn-success btn-xs col-md-12" %>
+                <% end %>
+              <% else %>
+                <%= form_tag controller: 'pages', action: 'podcaster_true', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "False", class: "btn btn-primary btn-xs col-md-12" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if u.analytics? %>
+                <%= form_tag controller: 'pages', action: 'analytics_false', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "True", class: "btn btn-success btn-xs col-md-12" %>
+                <% end %>
+              <% else %>
+                <%= form_tag controller: 'pages', action: 'analytics_true', id: u, method: :post, remote: true do %>
+                  <%= submit_tag "False", class: "btn btn-primary btn-xs col-md-12" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <br />
+</div>

@@ -64,6 +64,8 @@
                               <li><%= link_to "New Podcast", new_podcast_path, title: "New Podcast", "data-turbolinks" => "false" if current_user.admin? %></li>
                               <li><%= link_to "Pending Episodes", pending_path, title: "View pending episodes", "data-turbolinks" => "false" if current_user.podcaster? %></li>
                               <li><%= link_to "Sidekiq Queue", sidekiq_path, title: "Sidekiq Queue", "data-turbolinks" => "false" if current_user.admin? %></li>
+                              <li><%= link_to "User Administration", user_admin_path, title: "User Administration", "data-turbolinks" => "false" if current_user.admin? %></li>
+                              <li class="text-center">-------------------------------</li>
                               <li><%= link_to "Edit Profile", edit_user_registration_path, title: "Edit profile" %></li>
                               <li><%= link_to "Logout", destroy_user_session_path, method: :delete, title: "Logout" %></li>
                             </ul>

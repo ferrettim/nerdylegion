@@ -43,6 +43,17 @@ Rails.application.routes.draw do
   get 'privacy' => 'pages#privacy', as: :privacy
   get 'terms' => 'pages#terms', as: :terms
   get 'subscribe' => 'pages#subscribe', as: :subscribe
+  get 'user_admin' => 'pages#user_admin', as: :user_admin
+  resource :pages do
+    member do
+      post :podcaster_true
+      post :podcaster_false
+      post :analytics_true
+      post :analytics_false
+      post :admin_true
+      post :admin_false
+    end
+  end
   get 'analytics' => 'pages#analytics', as: :analytics
   get 'sitemap.xml', :to => 'pages#sitemap', :defaults => { :format => 'xml' }
   get 'robots.:format' => 'pages#robots'
