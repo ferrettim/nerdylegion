@@ -10,7 +10,15 @@ class PagesController < ApplicationController
 
   def user_admin
     if user_signed_in? && current_user.admin?
-      @users = User.where.not(admin: true).order(name: :desc)
+      @pagy, @users = pagy(User.where.not(admin: true).order(name: :desc), items: 10)
+      def create_user
+        User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], invite: ENV["INVITE_CODE"])
+        redirect_to user_admin_path, :flash => { :success => "Success! New user has been created!" }
+      end
+      def destroy_user
+        User.find(params[:id]).destroy
+        redirect_to user_admin_path, :flash => { :success => "Success! User has been removed" }
+      end
       def podcaster_true
         User.find(params[:id]).update_column(:podcaster, true)
         redirect_to user_admin_path, :flash => { :success => "Success! User has been upgraded to podcaster!" }

@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get 'user_admin' => 'pages#user_admin', as: :user_admin
   resource :pages do
     member do
+      post :create_user
+      post :destroy_user
       post :podcaster_true
       post :podcaster_false
       post :analytics_true

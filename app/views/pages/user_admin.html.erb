@@ -1,5 +1,19 @@
 <div class="col-md-12 col-sm-12 col-xs-12 panel panel-default">
-    <h4 class="text-center">User Administration</h4>
+    <h4 class="text-center">
+      User Administration
+    </h4>
+    <h5>Create New User</h5>
+    <%= form_tag controller: 'pages', action: 'create_user', method: :post, remote: true do %>
+      <ul class="list-inline">
+        <li><%= text_field_tag :name, nil, placeholder: "Name", class: "form-control col-md-2" %></li>
+        <li><%= email_field_tag :email, nil, placeholder: "Email", class: "form-control col-md-3" %></li>
+        <li><%= password_field_tag :password, nil, placeholder: "Password", class: "form-control col-md-3" %></li>
+        <li><%= password_field_tag :password_confirmation, nil, placeholder: "Password Confirmation", class: "form-control col-md-3" %></li>
+        <li><%= submit_tag "Create User", class: "btn btn-primary btn-sm form-control col-md-1" %></li>
+      </ul>
+    <% end %>
+    <div class="clearfix"></div>
+    <h5>Edit Current Users</h5>
     <table class="table table-responsive table-condensed table-hover">
       <thead>
         <tr>
@@ -9,6 +23,7 @@
           <td class="text-center">Admin?</td>
           <td class="text-center">Podcaster?</td>
           <td class="text-center">Analytics?</td>
+          <td class="text-center">Actions</td>
         </tr>
       </thead>
       <% @users.find_each do |u| %>
@@ -56,9 +71,17 @@
                 <% end %>
               <% end %>
             </td>
+            <td class="text-center">
+              <%= form_tag controller: 'pages', action: 'destroy_user', id: u, method: :post, remote: true do %>
+                <%= submit_tag "Remove", class: "btn btn-default btn-xs col-md-12" %>
+              <% end %>
+            </td>
           </tr>
         </tbody>
       <% end %>
     </table>
     <br />
+    <% if @pagy.count > 10 %>
+      <div class="text-center" style="margin-top: -40px;"><%== pagy_nav_bootstrap(@pagy).html_safe %></div>
+    <% end %>
 </div>
