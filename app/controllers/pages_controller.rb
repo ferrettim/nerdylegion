@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 
   def user_admin
     if user_signed_in? && current_user.admin?
-      @users = User.where.not(admin: true)
+      @users = User.where.not(admin: true).order(name: :desc)
       def podcaster_true
         User.find(params[:id]).update_column(:podcaster, true)
         redirect_to user_admin_path, :flash => { :success => "Success! User has been upgraded to podcaster!" }
