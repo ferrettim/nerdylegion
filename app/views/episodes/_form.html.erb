@@ -71,12 +71,12 @@
           <%= f.input :episode, as: :hidden, label: false %>
           <li class="col-md-12 col-sm-12 col-xs-12">
             <label name="podcast_id">Episode Title</label>
-            <%= f.input :title, label: false%>
+            <%= f.input :title, label: false, placeholder: "Enter episode title" %>
           </li>
         <% else %>
           <li class="col-md-2">
             <label name="podcast_id">Episode</label>
-            <%= f.input :episode, label: false %>
+            <%= f.input :episode, label: false, placeholder: "Enter episode title" %>
           </li>
           <li class="col-md-10">
             <%= f.input :title, label: "Episode Title" %>

@@ -1,0 +1,40 @@
+<div class="col-md-6 col-md-offset-3 panel panel-default">
+    <h4 class="text-center">Create New User</h4>
+    <%= form_tag controller: 'pages', action: 'create_user', method: :post, remote: true do %>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="nameAddon"><i class="fa fa-users"></i></span>
+            <%= text_field_tag :name, nil, placeholder: "Enter a name", class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="emailAddon"><i class="fa fa-envelope"></i></span>
+            <%= email_field_tag :email, nil, placeholder: "Enter an email address", class: "form-control" %>
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="twitterAddon">@</span>
+          <%= text_field_tag :twitter, nil, placeholder: "Twitter handle (No @ symbol)", class: "form-control" %>
+        </div>
+        <br />
+        <div class="form-group">
+          <em>Passwords have a six character minimum</em>
+          <br />
+          <div class="input-group">
+            <span class="input-group-addon" id="passwordAddon"><i class="fa fa-key"></i></span>
+            <%= password_field_tag :password, nil, placeholder: "Enter a password", class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="password_confirmationAddon"><i class="fa fa-key"></i></span>
+            <%= password_field_tag :password_confirmation, nil, placeholder: "Please confirm password", class: "form-control" %>
+        </div>
+        <br />
+        <div class="form-group">
+          <%= submit_tag "Create User", class: "btn btn-primary btn-sm form-control" %>
+        </div>
+    <% end %>
+    <div class="clearfix"></div>
+</div>

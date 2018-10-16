@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get 'terms' => 'pages#terms', as: :terms
   get 'subscribe' => 'pages#subscribe', as: :subscribe
   get 'user_admin' => 'pages#user_admin', as: :user_admin
+  get 'user_admin_new_path' => 'pages#user_admin_new', as: :user_admin_new
   resource :pages do
     member do
       post :create_user

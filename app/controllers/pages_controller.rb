@@ -11,10 +11,6 @@ class PagesController < ApplicationController
   def user_admin
     if user_signed_in? && current_user.admin?
       @pagy, @users = pagy(User.where.not(admin: true).order(name: :desc), items: 10)
-      def create_user
-        User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], invite: ENV["INVITE_CODE"])
-        redirect_to user_admin_path, :flash => { :success => "Success! New user has been created!" }
-      end
       def destroy_user
         User.find(params[:id]).destroy
         redirect_to user_admin_path, :flash => { :success => "Success! User has been removed" }
@@ -42,6 +38,17 @@ class PagesController < ApplicationController
       def admin_false
         User.find(params[:id]).update_column(:admin, false)
         redirect_to user_admin_path, :flash => { :success => "Success! User admin priviledges have been revoked!" }
+      end
+    else
+      redirect_to root_url
+    end
+  end
+
+  def user_admin_new
+    if user_signed_in? && current_user.admin?
+      def create_user
+        User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], invite: ENV["INVITE_CODE"])
+        redirect_to user_admin_path, :flash => { :success => "Success! New user has been created!" }
       end
     else
       redirect_to root_url

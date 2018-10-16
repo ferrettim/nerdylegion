@@ -1,19 +1,12 @@
 <div class="col-md-12 col-sm-12 col-xs-12 panel panel-default">
     <h4 class="text-center">
       User Administration
+      <span class="pull-right">
+        <%= link_to user_admin_new_path, title: "Create New User", class: "btn btn-primary btn-xs" do %>
+          <i class="fa fa-plus"></i> Create User
+        <% end %>
+      </span>
     </h4>
-    <h5>Create New User</h5>
-    <%= form_tag controller: 'pages', action: 'create_user', method: :post, remote: true do %>
-      <ul class="list-inline">
-        <li><%= text_field_tag :name, nil, placeholder: "Name", class: "form-control col-md-2" %></li>
-        <li><%= email_field_tag :email, nil, placeholder: "Email", class: "form-control col-md-3" %></li>
-        <li><%= password_field_tag :password, nil, placeholder: "Password", class: "form-control col-md-3" %></li>
-        <li><%= password_field_tag :password_confirmation, nil, placeholder: "Password Confirmation", class: "form-control col-md-3" %></li>
-        <li><%= submit_tag "Create User", class: "btn btn-primary btn-sm form-control col-md-1" %></li>
-      </ul>
-    <% end %>
-    <div class="clearfix"></div>
-    <h5>Edit Current Users</h5>
     <table class="table table-responsive table-condensed table-hover">
       <thead>
         <tr>
@@ -72,8 +65,8 @@
               <% end %>
             </td>
             <td class="text-center">
-              <%= form_tag controller: 'pages', action: 'destroy_user', id: u, method: :post, remote: true do %>
-                <%= submit_tag "Remove", class: "btn btn-default btn-xs col-md-12" %>
+              <%= form_tag controller: 'pages', action: 'destroy_user', id: u, method: :delete, remote: true do %>
+                <%= submit_tag "Remove", class: "btn btn-info btn-xs col-md-12", data: { confirm: "Are you sure you want to remove this user?" } %>
               <% end %>
             </td>
           </tr>

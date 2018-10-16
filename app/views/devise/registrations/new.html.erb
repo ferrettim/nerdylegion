@@ -1,49 +1,58 @@
 
 <div class="col-md-6 col-md-offset-3 panel panel-default">
-  <h2>Sign up</h2>
+  <h4 class="text-center">Sign up</h4>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
     <div class="form-group">
-      <%= f.label :invite, "Invitation Code" %><br />
-      <%= f.text_field :invite %>
-    </div>
-
-    <div class="form-group">
       <label name="image">Upload image</label>
       <%= f.file_field :imageurl %>
     </div>
+
     <div class="form-group">
-      <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+      <div class="input-group">
+        <span class="input-group-addon" id="nameAddon"><i class="fa fa-gear"></i></span>
+        <%= f.text_field :invite, placeholder: "Enter invite code (Required for signup)", class: "form-control" %>
+      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      <div class="input-group">
+        <span class="input-group-addon" id="nameAddon"><i class="fa fa-users"></i></span>
+        <%= f.text_field :name, placeholder: "Enter your name", class: "form-control" %>
+      </div>
     </div>
 
-    <label name="twitter">Twitter</label>
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-addon" id="emailAddon"><i class="fa fa-envelope"></i></span>
+        <%= f.email_field :email, placeholder: "Enter your email address", class: "form-control" %>
+      </div>
+    </div>
+
     <div class="input-group">
       <span class="input-group-addon" id="twitterAddon">@</span>
-      <%= f.text_field :twitter, placeholder: "username", label: false, class: "form-control" %>
+      <%= f.text_field :twitter, placeholder: "Twitter handle (no @ symbol)", label: false, class: "form-control" %>
     </div>
     <br />
 
     <div class="form-group">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      <em>Passwords have a six character minimum</em>
+      <br />
+      <div class="input-group">
+        <span class="input-group-addon" id="passwordAddon"><i class="fa fa-key"></i></span>
+        <%= f.password_field :password, placeholder: "Enter your password", autocomplete: "off", class: "form-control" %>
+      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      <div class="input-group">
+        <span class="input-group-addon" id="password_confirmationAddon"><i class="fa fa-key"></i></span>
+        <%= f.password_field :password_confirmation, placeholder: "Please confirm password", autocomplete: "off", class: "form-control" %>
+      </div>
     </div>
-
+    <div class="clearfix"><br /><br /></div>
     <div class="form-button">
       <%= f.submit "Sign up", class: "btn btn-primary col-md-12 col-sm-12 col-xs-12"  %>
     </div>
