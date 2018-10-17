@@ -1,0 +1,20 @@
+<div class="col-md-12 box">
+  <div class="col-md-9 col-sm-9">
+    <div class="panel panel-default">
+      <% @abouts.each do |about| %>
+        <div class="panel-heading">
+          <h4 class="body-header"><%= about.title.to_s %></h4>
+        </div>
+        <%= image_tag about.bannerurl.to_s, title: about.title.to_s, alt: about.title.to_s, style: "width: 100% !important; object-fit: cover;" %>
+        <div class="panel-body">
+          <%= about.description.to_s.html_safe %>
+          <% if user_signed_in? && current_user.admin? %>
+            <br />
+            <%= link_to "Edit This Page", edit_about_path(about), title: "Edit About" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render "pages/sidebar" %>
+</div>

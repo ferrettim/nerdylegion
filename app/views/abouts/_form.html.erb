@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <%= simple_form_for(@about) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <% if @about.bannerurl? %>
+        <div class="col-md-12">
+          <div class="col-md-9">
+            <label name="image">Upload banner</label>
+            <%= f.input :bannerurl, as: :file, label: false %>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+      <% else %>
+        <label name="image">Upload banner</label>
+        <%= f.input :bannerurl, as: :file, label: false %>
+      <% end %>
+      <%= f.input :title, class: "form-control" %>
+      <%= f.input :description, as: :trix_editor, class: "form-control" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary col-md-12 col-sm-12 col-xs-12" %>
+    </div>
+
+  <% end %>
+  <div class="clearfix"><br /><br /></div>
+
+</div>

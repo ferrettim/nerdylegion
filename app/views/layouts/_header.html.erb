@@ -50,6 +50,15 @@
                             <% end %>
                         </ul>
                       </li>
+                      <li>
+                        <% if About.all.count == 1 %>
+                          <%= link_to "About", aboutus_path, title: "About Us" %>
+                        <% else %>
+                          <% if user_signed_in? && current_user.admin? %>
+                            <%= link_to "Create About", new_about_path, title: "Create About" %>
+                          <% end %>
+                        <% end %>
+                      </li>
                       <li><%= link_to "Subscribe", subscribe_path, title: "Subscribe" %></li>
                       <li class="visible-xs"><%= link_to "Shop", "https://nerdylegion.threadless.com/", target: "_blank", rel: "noopener", title: "Shop" %></li>
                       <% unless user_signed_in? %>

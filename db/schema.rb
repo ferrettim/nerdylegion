@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_170430) do
+ActiveRecord::Schema.define(version: 2018_10_17_165617) do
+
+  create_table "abouts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "bannerurl"
+  end
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
