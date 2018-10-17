@@ -1,15 +1,15 @@
-# Nerdy Legion
+# Nerdy Legion CMS
 
-The following code base runs the [Nerdy Legion Podcast Network](https://nerdylegion.com) and is available for use under the MIT license (see below for terms).
+The following code base runs the [Nerdy Legion Podcast Network](https://nerdylegion.com) and is available for use under the [GPL 3.0 License](https://opensource.org/licenses/GPL-3.0).
 
-NerdyLegion is a simple CRM created for podcast networks to make it easy to begin publishing content with little to no setup. It supports multiple podcasts, multiple users, and provides end users with tons of relevant information. The code is under constant development and new features are constantly being added.
+Nerdy Legion CMS is a simple content management system created for podcast networks to make it easy to begin publishing content with little setup. It supports multiple podcasts, multiple users, is almost completely modular and provides end users with tons of relevant show and episode information. The code is under constant development and new features are added on a weekly basis.
 
 ## Requirements:
 
 * Ruby 2.4.0
-* Ruby On Rails 5.1+
+* Ruby On Rails 5.2.1+
 * Postgres/Redis/Sidekiq
-* Web Host/NGINX
+* Web host with NGINX
 * Digital Ocean (for podcast and image hosting)
 
 ## Roadmap:
@@ -24,28 +24,10 @@ NerdyLegion is a simple CRM created for podcast networks to make it easy to begi
 
 * Version 3.5 (Fix all remaining bugs. Implement new audio player with visualizer.) (TBD)
 
-* Version 4.0 (User managed advertising.) (TBD)
+* Version 4.0 (User managed advertising) (TBD)
 
 ___
 
-[MIT License](https://opensource.org/licenses/MIT)
+[Distributed under the GPL 3.0 License](https://opensource.org/licenses/GPL-3.0)
 
 Copyright (c) [2017] [Nerdy Legion](https://nerdylegion.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
