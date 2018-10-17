@@ -2,13 +2,13 @@
   <div class="col-md-9 col-sm-9">
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h4 class="body-header"><%= @about.title.to_s %></h4>
+          <h4 class="body-header"><%= @term.title.to_s %></h4>
         </div>
         <div class="panel-body">
-          <%= @about.description.to_s.html_safe %>
+          <%= @term.description.to_s.html_safe %>
           <% if user_signed_in? && current_user.admin? %>
             <br />
-            <%= link_to "Edit This Page", edit_about_path(@about), title: "Edit About" %>
+            <%= link_to "Edit This Page", edit_term_path(@term), title: "Edit About" %>
           <% end %>
         </div>
     </div>

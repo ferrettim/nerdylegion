@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   end
 
   resources :abouts
+  resources :privacies
+  resources :terms
   resources :episodes
   get 'pending' => 'episodes#pending', as: :pending
   resources :podcasts
@@ -42,8 +44,8 @@ Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup'}
   root :to => 'episodes#index'
   get "aboutus" => 'abouts#index', as: :aboutus
-  get 'privacy' => 'pages#privacy', as: :privacy
-  get 'terms' => 'pages#terms', as: :terms
+  get 'privacy' => 'privacies#index', as: :privacypolicy
+  get 'terms' => 'terms#index', as: :termsofservice
   get 'subscribe' => 'pages#subscribe', as: :subscribe
   get 'user_admin' => 'pages#user_admin', as: :user_admin
   get 'user_admin_new_path' => 'pages#user_admin_new', as: :user_admin_new

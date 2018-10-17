@@ -4,8 +4,20 @@
     <div class="navbar-footer text-center">
       <ul class="list-inline small">
         <li>Nerdy Legion &copy; <%= Time.now.strftime("%Y") %></li>
-        <li><%= link_to "Privacy", privacy_path, title: "Privacy Policy" %></li>
-        <li><%= link_to "Terms", terms_path, title: "Terms and Conditions" %></li>
+        <% if Privacy.all.count == 1 %>
+          <li><%= link_to "Privacy", privacypolicy_path, title: "Privacy Policy" %></li>
+        <% else %>
+          <% if user_signed_in? && current_user.admin? %>
+            <li><%= link_to "Create Privacy Policy", new_privacy_path, title: "Create Privacy Policy" %></li>
+          <% end %>
+        <% end %>
+        <% if Term.all.count == 1 %>
+          <li><%= link_to "Terms", termsofservice_path, title: "Terms of Service" %></li>
+        <% else %>
+          <% if user_signed_in? && current_user.admin? %>
+            <li><%= link_to "Create Terms of Service", new_term_path, title: "Create Terms of Service" %></li>
+          <% end %>
+        <% end %>
         <% unless user_signed_in? %>
           <li><%= link_to "Login", new_user_session_path, title: "Login" %></li>
         <% end %>
