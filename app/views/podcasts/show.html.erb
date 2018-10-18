@@ -67,24 +67,24 @@
             </p>
               <p><%= @podcast.title %> is hosted by
                 <% @host.each do |host| %>
-                  <%= link_to host.name, "https://www.twitter.com/" + host.twitter, title: host.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                  <%= link_to host.name.to_s, "https://www.twitter.com/" + host.twitter.to_s, title: host.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                 <% end %>
                 <% if @podcast.user2_id? && @podcast.user3_id.blank? %>
                   <% @host2.each do |host2| %>
-                    and <%= link_to host2.name, "https://www.twitter.com/" + host2.twitter, title: host2.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    and <%= link_to host2.name.to_s, "https://www.twitter.com/" + host2.twitter.to_s, title: host2.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                   <% end %>
                 <% end %>
                 <% if @podcast.user2_id? && @podcast.user3_id? %>
                   <% @host2.each do |host2| %>
-                    , <%= link_to host2.name, "https://www.twitter.com/" + host2.twitter, title: host2.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    , <%= link_to host2.name.to_s, "https://www.twitter.com/" + host2.twitter.to_s, title: host2.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                   <% end %>
                   <% @host3.each do |host3| %>
-                    and <%= link_to host3.name, "https://www.twitter.com/" + host3.twitter, title: host3.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    and <%= link_to host3.name.to_s, "https://www.twitter.com/" + host3.twitter.to_s, title: host3.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                   <% end %>
                 <% end %>
                 and produced by
                 <% @producer.each do |p| %>
-                  <%= link_to p.name, "https://www.twitter.com/" + p.twitter, title: p.name + " on Twitter", target: "_blank", rel: "noopener" %>.
+                  <%= link_to p.name.to_s, "https://www.twitter.com/" + p.twitter.to_s, title: p.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>.
                 <% end %>
                 You can support this show by visiting our <%= link_to "merch store", "https://nerdylegion.threadless.com", target: "_blank", title: "Threadless" %>
                   <% if @podcast.patreon? %>

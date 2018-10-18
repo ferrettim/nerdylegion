@@ -18,26 +18,26 @@
                 <div class="pull-left col-md-2 col-sm-3 col-xs-5" style="padding: 10px 15px 5px 0;">
                   <%= image_tag p.logourl.to_s, alt: p.title.to_s, width: "100%" %>
                 </div>
-                <p style="margin-top: 5px;"><%= p.title %> is hosted by
-                  <% @host.each do |host| %>
-                    <%= link_to host.name, "https://www.twitter.com/" + host.twitter, title: host.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                <p style="margin-top: 5px;"><%= p.title.to_s %> is hosted by
+                  <% User.where(id: p.user_id).each do |host| %>
+                    <%= link_to host.name.to_s, "https://www.twitter.com/" + host.twitter.to_s, title: host.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                   <% end %>
                   <% if p.user2_id? && p.user3_id.blank? %>
-                    <% @host2.each do |host2| %>
-                      and <%= link_to host2.name, "https://www.twitter.com/" + host2.twitter, title: host2.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    <% User.where(id: p.user2_id).each do |host2| %>
+                      and <%= link_to host2.name.to_s, "https://www.twitter.com/" + host2.twitter.to_s, title: host2.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                     <% end %>
                   <% end %>
                   <% if p.user2_id? && p.user3_id? %>
-                    <% @host2.each do |host2| %>
-                      , <%= link_to host2.name, "https://www.twitter.com/" + host2.twitter, title: host2.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    <% User.where(id: p.user2_id).each do |host2| %>
+                      , <%= link_to host2.name.to_s, "https://www.twitter.com/" + host2.twitter.to_s, title: host2.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                     <% end %>
-                    <% @host3.each do |host3| %>
-                      and <%= link_to host3.name, "https://www.twitter.com/" + host3.twitter, title: host3.name + " on Twitter", target: "_blank", rel: "noopener" %>
+                    <% User.where(id: p.user3_id).each do |host3| %>
+                      and <%= link_to host3.name.to_s, "https://www.twitter.com/" + host3.twitter.to_s, title: host3.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                     <% end %>
                   <% end %>
                   and produced by
-                  <% @producer.each do |producer| %>
-                    <%= link_to producer.name, "https://www.twitter.com/" + producer.twitter, title: producer.name + " on Twitter", target: "_blank", rel: "noopener" %>.
+                  <% User.where(id: p.producer_id).each do |producer| %>
+                    <%= link_to producer.name.to_s, "https://www.twitter.com/" + producer.twitter.to_s, title: producer.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>.
                   <% end %>
                 <ul class="list-inline">
                   <li style="margin-left: -5px;"><strong>Subscribe:</strong></li>
