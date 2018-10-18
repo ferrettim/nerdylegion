@@ -56,8 +56,6 @@ gem 'fog-aws'
 gem 'friendly_id'
 # Pagination
 gem 'pagy'
-# Audio length
-gem 'mechanize'
 # Social
 gem 'twitter'
 gem 'sidekiq'

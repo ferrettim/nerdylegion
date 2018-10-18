@@ -90,8 +90,8 @@ class EpisodesController < ApplicationController
       @podcast = Podcast.where(status: "Published").order(title: :asc)
       respond_to do |format|
         if @episode.save
-          @episode.update_attributes(download_size: ((Mechanize.new.head( @episode.audiourl.to_s )["content-length"].to_i)/1024/1000))
-          @episode.update_attributes(duration: Time.at(((Mechanize.new.head( @episode.audiourl.to_s )["content-length"].to_i)/1024*8.2/64)).utc.strftime('%H:%M:%S'))
+          @episode.update_attributes(download_size: @episode.audiourl.size.to_i/1024/1000)
+          @episode.update_attributes(duration: Time.at(@episode.audiourl.size.to_i/1024*8.2/64).utc.strftime('%H:%M:%S'))
           @episode.schedule
           format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
           format.json { render :json => @episode }
