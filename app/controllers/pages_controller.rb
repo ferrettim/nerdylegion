@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 
   def user_admin
     if user_signed_in? && current_user.admin?
-      @pagy, @users = pagy(User.where.not(admin: true).order(name: :desc), items: 10)
+      @pagy, @users = pagy(User.where.not(admin: true).order(name: :asc), items: 15)
       def destroy_user
         User.find(params[:id]).destroy
         redirect_to user_admin_path, :flash => { :success => "Success! User has been removed" }
