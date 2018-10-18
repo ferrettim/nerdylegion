@@ -9,7 +9,7 @@
           <%= term.description.to_s.html_safe %>
           <% if user_signed_in? && current_user.admin? %>
             <br />
-            <%= link_to "Edit This Page", edit_term_path(about), title: "Edit Terms of Service" %>
+            <%= link_to "Edit This Page", edit_term_path(term), title: "Edit Terms of Service" %>
           <% end %>
         </div>
       <% end %>
