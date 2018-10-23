@@ -47,7 +47,7 @@ class PagesController < ApplicationController
   def user_admin_new
     if user_signed_in? && current_user.admin?
       def create_user
-        User.create!(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], invite: ENV["INVITE_CODE"])
+        User.create(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], invite: ENV["INVITE_CODE"])
         redirect_to user_admin_path, :flash => { :success => "Success! New user has been created!" }
       end
     else

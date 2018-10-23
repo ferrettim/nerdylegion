@@ -11,6 +11,7 @@ class PrivaciesController < ApplicationController
   # GET /privacies/1
   # GET /privacies/1.json
   def show
+    redirect_to root_url
   end
 
   # GET /privacies/new

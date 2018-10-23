@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="fXdxoXSNBjFWM75hh3nn9wm4O6FsX2DgEQO1qTpgfy4" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@nerdylegion" />
-    <meta name="twitter:creator" content="@nerdylegion" />
+    <% if Setting.count == 1 %>
+      <meta name="twitter:site" content="@<%= Setting.first.twitter.to_s %>" />
+      <meta name="twitter:creator" content="@<%= Setting.first.twitter.to_s %>" />
+    <% end %>
     <% if yield(:twitter_image).present? %>
       <meta property="twitter:image" content="<%= yield(:og_image) %>" />
       <meta property="twitter:image:type" content="image/jpeg" />
@@ -17,19 +19,30 @@
     <% if yield(:og_title).present? %>
       <meta name="twitter:title" content="<%= yield(:og_title) %>" />
     <% else %>
-      <meta name="twitter:title" content="The Nerdy Legion Podcast Network" />
+      <% if Setting.count == 1 %>
+        <meta name="twitter:title" content="<%= Setting.first.name.to_s %>" />
+      <% else %>
+        <meta name="twitter:title" content="Sprout" />
+      <% end %>
     <% end %>
     <% if yield(:og_description).present? %>
       <meta name="twitter:description" content="<%= yield(:og_description) %>" />
     <% else %>
-      <meta name="twitter:description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
+      <% if Setting.count == 1 %>
+        <meta name="twitter:description" content="<%= strip_tags(Setting.first.description.to_s.html_safe) %>" />
+      <% else %>
+        <meta name="twitter:description" content="Powered by Sprout, an open source solution for creating and distributing podcasts" />
+      <% end %>
     <% end %>
     <% if yield(:meta_description).present? %>
       <meta name="description" content="<%= yield(:meta_description) %>" />
     <% else %>
-      <meta name="description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
+      <% if Setting.count == 1 %>
+        <meta name="description" content="<%= strip_tags(Setting.first.description.to_s.html_safe) %>" />
+      <% else %>
+        <meta name="description" content="Powered by Sprout, an open source solution for creating and distributing podcasts" />
+      <% end %>
     <% end %>
-    <meta property="fb:app_id" content="<%= ENV['FB_APP_ID'] %>" />
     <% if yield(:og_title).present? %>
       <meta property="og:title" content="<%= yield(:og_title) %>" />
     <% else %>
@@ -38,7 +51,11 @@
     <% if yield(:og_description).present? %>
       <meta property="og:description" content="<%= yield(:og_description) %>" />
     <% else %>
-      <meta property="og:description" content="The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today." />
+      <% if Setting.count == 1 %>
+        <meta name="og:description" content="<%= strip_tags(Setting.first.description.to_s.html_safe) %>" />
+      <% else %>
+        <meta name="og:description" content="Powered by Sprout, an open source solution for creating and distributing podcasts" />
+      <% end %>
     <% end %>
     <% if yield(:og_type).present? %>
       <meta property="og:type" content="<%= yield(:og_type) %>" />
@@ -52,7 +69,7 @@
     <% if yield(:og_url).present? %>
       <meta property="og:url" content="<%= yield(:og_url) %>" />
     <% else %>
-      <meta property="og:url" content="https://nerdylegion.com" />
+      <meta property="og:url" content="<%= root_url %>" />
     <% end %>
     <% if yield(:og_image).present? %>
       <meta property="og:image" content="<%= yield(:og_image) %>" />
@@ -63,16 +80,26 @@
       <meta property="og:image" content="https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg" />
       <meta property="og:image:type" content="image/jpeg" />
     <% end %>
-    <meta property="og:site_name" content="The Nerdy Legion Podcast Network" />
+    <% if Setting.count == 1 %>
+      <meta property="og:site_name" content="<%= Setting.first.name.to_s %>" />
+    <% else %>
+      <meta property="og:site_name" content="Sprout" />
+    <% end %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#eb6864" />
     <%= csrf_meta_tags %>
-    <link rel="shortcut icon" type="image/x-icon" href="https://nl1.nyc3.digitaloceanspaces.com/assets/favicon.ico" />
-    <link rel="canonical" href="https://nerdylegion.com" />
+    <% if Setting.count == 1 %>
+      <link rel="shortcut icon" type="image/x-icon" href="<%= Setting.first.favicon.to_s %>" />
+    <% end %>
+    <link rel="canonical" href="<%= root_url %>" />
     <% if yield(:meta_title).present? %>
       <title><%= yield(:meta_title) %></title>
     <% else %>
-      <title>Nerdy Legion Podcast Network | Nerdy Podcasts, Made For You</title>
+      <% if Setting.count == 1 %>
+        <title><%= Setting.first.name.to_s %> | <%= Setting.first.title.to_s %></title>
+      <% else %>
+        <title>Sprout | This website is powered by Sprout</title>
+      <% end %>
     <% end %>
     <%= stylesheet_link_tag 'application', :media => "all" %>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -124,25 +151,27 @@
 
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Organization",
-      "url": "https://nerdylegion.com",
-      "image": "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg",
-      "description": "The Nerdy Legion Podcast Network brings you the best comic and nerd talk every day of the week. Download your favorite episode today.",
-      "contactPoint": [
-        { "@type": "ContactPoint",
-          "url": "https://nerdylegion.com",
-          "contactType": "customer service"
-        }
-      ],
-      "sameAs": [
-        "https://www.facebook.com/nerdylegion",
-        "https://www.twitter.com/nerdylegion"
-      ]
-    }
-    </script>
+    <% if Setting.count == 1 %>
+      <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "url": "<%= root_url %>",
+        "image": "https://nl1.nyc3.digitaloceanspaces.com/assets/nloffline.jpg",
+        "description": "<%= Setting.first.description.to_s.html_safe %>",
+        "contactPoint": [
+          { "@type": "ContactPoint",
+            "url": "<%= root_url %>",
+            "contactType": "customer service"
+          }
+        ],
+        "sameAs": [
+          "<%= Setting.first.facebook.to_s %>",
+          "https://www.twitter.com/<%= Setting.first.twitter.to_s %>"
+        ]
+      }
+      </script>
+    <% end %>
   </body>
 
 

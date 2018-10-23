@@ -11,6 +11,7 @@ class TermsController < ApplicationController
   # GET /terms/1
   # GET /terms/1.json
   def show
+    redirect_to root_url
   end
 
   # GET /terms/new

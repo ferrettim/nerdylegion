@@ -24,7 +24,63 @@
             <div class="clearfix"></div>
           </div>
           <h4 class="body-header"><% if @episode.episodetype == "Bonus" %>BONUS:<% end %> <%= @episode.title.titleize %></h4>
-          <p class="small muted" style="padding-top: 5px;"><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %> &nbsp;&nbsp; <i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %></p>
+          <ul class="small muted list-inline">
+            <li><i class="fa fa-calendar"></i> <%= @episode.published_on.strftime("%b %d, %Y") %></li>
+            <li><i class="fa fa-clock-o"></i>  <%= @episode.duration.to_s %></li>
+            <% if user_signed_in? && current_user.podcaster? %>
+              <% if current_user.admin? %>
+                <li>
+                  <%= link_to edit_episode_path(@episode),
+                            title: "Edit episode" do %>
+                            Edit
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to episode_path(@episode),
+                            method: :delete,
+                            data: { confirm: "Are you sure you want to delete this episode?" },
+                            title: "Delete episode" do %>
+                            Delete
+                  <% end %>
+                </li>
+              <% else %>
+                <% if current_user.id == @episode.podcast.user_id %>
+                  <li>
+                    <%= link_to edit_episode_path(@episode),
+                              title: "Edit episode" do %>
+                               Edit
+                    <% end %>
+                  </li>
+                <% end %>
+                <% if current_user.id == @episode.podcast.user2_id %>
+                  <li>
+                    <%= link_to edit_episode_path(@episode),
+                              title: "Edit episode" do %>
+                               Edit
+                    <% end %>
+                  </li>
+                <% end %>
+                <% if current_user.id == @episode.podcast.user3_id %>
+                  <li>
+                    <%= link_to edit_episode_path(@episode),
+                              title: "Edit episode" do %>
+                               Edit
+                    <% end %>
+                  </li>
+                <% end %>
+                <% unless current_user.id == @episode.podcast.user_id && @episode.podcast.producer_id %>
+                  <% if current_user.id == @episode.podcast.producer_id %>
+                    <li>
+                      <%= link_to edit_episode_path(@episode),
+                                title: "Edit episode" do %>
+                                 Edit
+                      <% end %>
+                    </li>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
           <div class="pull-left visible-xs">
             <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/loading.gif", data: { src: @episode.podcast.logourl.small.to_s }, alt: @episode.podcast.title.titleize, class: "img-responsive align-center", width: "90%;", title: "Loading..." %>
             <div class="clearfix"></div>

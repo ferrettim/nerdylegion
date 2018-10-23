@@ -11,6 +11,7 @@ class AboutsController < ApplicationController
   # GET /abouts/1
   # GET /abouts/1.json
   def show
+    redirect_to root_url
   end
 
   # GET /abouts/new

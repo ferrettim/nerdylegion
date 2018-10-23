@@ -3,7 +3,11 @@
   <div class="container-fluid">
     <div class="navbar-footer text-center">
       <ul class="list-inline small">
-        <li>Nerdy Legion &copy; <%= Time.now.strftime("%Y") %></li>
+        <% if Setting.count == 1 %>
+          <li><%= Setting.first.name.to_s %> &copy; <%= Time.now.strftime("%Y") %></li>
+        <% else %>
+          Powered by Sprout
+        <% end %>
         <% if Privacy.all.count == 1 %>
           <li><%= link_to "Privacy", privacypolicy_path, title: "Privacy Policy" %></li>
         <% else %>

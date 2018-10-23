@@ -1,0 +1,19 @@
+<div class="col-md-12 box">
+  <div class="col-md-9 col-sm-9">
+    <div class="panel panel-default">
+      <% @settings.each do |setting| %>
+        <div class="panel-heading">
+          <h4 class="body-header"><%= setting.title.to_s %></h4>
+        </div>
+        <div class="panel-body">
+          <%= setting.description.to_s.html_safe %>
+          <% if user_signed_in? && current_user.admin? %>
+            <br />
+            <%= link_to "Edit This Page", edit_setting_path(setting), title: "Edit settings" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render "pages/sidebar" %>
+</div>

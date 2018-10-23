@@ -12,7 +12,12 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <h1 class="navbar-header"><a class="navbar-brand" href="/" title="Nerdy Legion Podcast Network">Nerdy Legion</a></h1>
+                    <% if Setting.count == 1 %>
+                      <h1 class="navbar-header">
+                        <%= link_to Setting.first.name.to_s, root_url, title: Setting.first.name.to_s, class: "navbar-brand" %></h1>
+                    <% else %>
+                      <h1 class="navbar-header"><a class="navbar-brand" href="/" title="Sprout">Sprout</a></h1>
+                    <% end %>
                   </div>
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,7 +65,7 @@
                         <% end %>
                       </li>
                       <li><%= link_to "Subscribe", subscribe_path, title: "Subscribe" %></li>
-                      <li class="visible-xs"><%= link_to "Shop", "https://nerdylegion.threadless.com/", target: "_blank", rel: "noopener", title: "Shop" %></li>
+                      <li class="visible-xs"><%= link_to "Merch", "https://nerdylegion.threadless.com/", target: "_blank", rel: "noopener", title: "Merch" %></li>
                       <% unless user_signed_in? %>
                         <li class="visible-xs"><%= link_to "Login", new_user_session_path, target: "_blank", rel: "noopener", title: "Login" %></li>
                       <% end %>
@@ -73,8 +78,16 @@
                               <li><%= link_to "New Episode", new_episode_path, title: "New Episode", "data-turbolinks" => "false" if current_user.podcaster? %></li>
                               <li><%= link_to "New Podcast", new_podcast_path, title: "New Podcast", "data-turbolinks" => "false" if current_user.admin? %></li>
                               <li><%= link_to "Pending Episodes", pending_path, title: "View pending episodes", "data-turbolinks" => "false" if current_user.podcaster? %></li>
-                              <li><%= link_to "Sidekiq Queue", sidekiq_path, title: "Sidekiq Queue", "data-turbolinks" => "false" if current_user.admin? %></li>
-                              <li><%= link_to "User Administration", user_admin_path, title: "User Administration", "data-turbolinks" => "false" if current_user.admin? %></li>
+                              <% if current_user.admin? %>
+                                <li class="text-center">-------------------------------</li>
+                                <li><%= link_to "Sidekiq Queue", sidekiq_path, title: "Sidekiq Queue", "data-turbolinks" => "false" %></li>
+                                <% if Setting.count == 1 %>
+                                  <li><%= link_to "Site Settings", edit_setting_path(Setting.find(1)), title: "Site Settings", "data-turbolinks" => "false" %></li>
+                                <% else %>
+                                  <li><%= link_to "Site Settings", new_setting_path, title: "Site Settings", "data-turbolinks" => "false" %></li>
+                                <% end %>
+                                <li><%= link_to "User Administration", user_admin_path, title: "User Administration", "data-turbolinks" => "false" %></li>
+                              <% end %>
                               <li class="text-center">-------------------------------</li>
                               <li><%= link_to "Edit Profile", edit_user_registration_path, title: "Edit profile" %></li>
                               <li><%= link_to "Logout", destroy_user_session_path, method: :delete, title: "Logout" %></li>

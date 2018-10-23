@@ -35,9 +35,8 @@
                       and <%= link_to host3.name.to_s, "https://www.twitter.com/" + host3.twitter.to_s, title: host3.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>
                     <% end %>
                   <% end %>
-                  and produced by
                   <% User.where(id: p.producer_id).each do |producer| %>
-                    <%= link_to producer.name.to_s, "https://www.twitter.com/" + producer.twitter.to_s, title: producer.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>.
+                    and produced by <%= link_to producer.name.to_s, "https://www.twitter.com/" + producer.twitter.to_s, title: producer.name.to_s + " on Twitter", target: "_blank", rel: "noopener" %>.
                   <% end %>
                 <ul class="list-inline">
                   <li style="margin-left: -5px;"><strong>Subscribe:</strong></li>
