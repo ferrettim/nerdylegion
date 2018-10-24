@@ -103,7 +103,7 @@ class PagesController < ApplicationController
   end
 
   def sitemap
-    @static_pages = [privacypolicy_path, termsofservice_path, subscribe_path]
+    @static_pages = [aboutus_path, subscribe_path, privacypolicy_path, termsofservice_path]
     @episodes = Episode.where(status: "Published")
     respond_to do |format|
       format.xml
