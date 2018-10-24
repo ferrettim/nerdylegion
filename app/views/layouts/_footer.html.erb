@@ -3,8 +3,8 @@
   <div class="container-fluid">
     <div class="navbar-footer text-center">
       <ul class="list-inline small">
-        <% if Setting.count == 1 %>
-          <li><%= Setting.first.name.to_s %> &copy; <%= Time.now.strftime("%Y") %></li>
+        <% if $settings_exist %>
+          <li><%= $setting.name.to_s %> &copy; <%= Time.now.strftime("%Y") %></li>
         <% else %>
           Powered by Sprout
         <% end %>
