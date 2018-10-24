@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @sponsor.image.to_s, alt: @sponsor.name.to_s %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sponsor.name.to_s %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @sponsor.description.to_s.html_safe %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @sponsor.link.to_s %>
+</p>
+
+<p>
+  <strong>Active?</strong>
+  <%= @sponsor.status.to_s %>
+</p>
+
+<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
+<%= link_to 'Back', sponsors_path %>

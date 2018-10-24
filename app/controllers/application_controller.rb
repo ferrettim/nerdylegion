@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   $settings_exist = Setting.count == 1
   $setting = Setting.first
+  $sponsors = Sponsor.where(status: true)
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :imageurl, :twitter, :admin, :podcaster, :analytics, :invite])

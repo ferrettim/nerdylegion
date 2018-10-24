@@ -1,0 +1,34 @@
+<div class="col-md-12 box">
+  <div class="col-md-9 col-sm-9 panel panel-default">
+    <h4>Sponsors <div class="pull-right"><%= link_to 'New Sponsor', new_sponsor_path, class: "btn btn-primary btn-sm" %></div></h4>
+    <table class="table table-responsive table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Link</th>
+          <th>Image</th>
+          <th>Active</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @sponsors.each do |sponsor| %>
+          <tr>
+            <td><h4 class="body-header"><%= sponsor.name.to_s %></h4></td>
+            <td><%= link_to "Link", sponsor.link.to_s, title: sponsor.name.to_s %></td>
+            <td><%= image_tag sponsor.image.thumb.to_s, alt: sponsor.name.to_s %></td>
+            <td><%= sponsor.status.to_s %></td>
+            <td class="text-center">
+              <%= link_to 'Show', sponsor, class: "btn btn-primary btn-sm" %>
+              <%= link_to 'Edit', edit_sponsor_path(sponsor), class: "btn btn-primary btn-sm"  %>
+              <%= link_to 'Destroy', sponsor, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-sm"  %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <%= render "pages/sidebar" %>
+</div>

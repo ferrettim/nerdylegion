@@ -1,0 +1,40 @@
+<div class="col-md-12">
+  <%= simple_form_for(@sponsor) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <ul class="list-inline">
+        <li class="col-md-8 col-sm-8 col-xs-12">
+          <label name="name">* Sponsor Name</label>
+          <%= f.input :name, label: false, placeholder: "Enter sponsor name", class: "form-control" %>
+        </li>
+        <li class="col-md-4 col-sm-4 col-xs-12">
+          <label name="image">* Upload Image</label>
+          <%= f.file_field :image %>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+      <label name="description">* Description</label>
+      <%= f.input :description, label: false, as: :trix_editor, class: "form-control" %>
+      <small>Your sponsor description will appear in your episode show page, RSS feeds, and on podcast players.</small>
+      <div class="clearfix"><br /></div>
+      <ul class="list-inline">
+        <li class="col-md-10 col-sm-10 col-xs-12">
+          <%= f.input :link, placeholder: "Enter sponsor or affiliate link", class: "form-control" %>
+        </li>
+        <li class="col-md-2 col-sm-2 col-xs-12 text-center">
+          <label name="status">Active?</label>
+          <%= f.input :status, class: "form-control", label: false %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="clearfix"><br /></div>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary col-md-12 col-sm-12 col-xs-12" %>
+    </div>
+
+  <% end %>
+  <div class="clearfix"><br /><br /></div>
+
+</div>

@@ -1,12 +1,9 @@
 <div class="col-md-3 col-sm-3 visible-lg visible-md visible-sm">
-  <h4>Sponsored By</h4>
-  <%= link_to audible_path, target: "_blank", rel: "noopener", title: "Audible" do %>
-    <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/audible.jpg", alt: "Join Audible", class: "img-responsive" %>
+  <h4>Brought To You By</h4>
+  <% Sponsor.all.each do |sponsor| %>
+    <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s do %>
+      <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s, class: "img-responsive" %>
+    <% end %>
+    <br />
   <% end %>
-  <h4>Get Merchandise</h4>
-  <%= link_to "https://nerdylegion.threadless.com", target: "_blank", rel: "noopener", title: "Threadless" do %>
-    <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/threadless.jpg", alt: "Threadless", class: "img-responsive" %>
-  <% end %>
-  <br />
-  <p class="small">Bandwidth for the network is sponsored by <%= link_to "Digital Ocean", digitalocean_path, title: "Digital Ocean", target: "_blank", rel: "noopener" %>.</p>
 </div>

@@ -106,42 +106,22 @@
               <% end %>
           </p>
 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="sponsor-header">Brought to you by:</h4>
+              <ul>
+                <% @sponsors.each do |sponsor| %>
+                  <li><%= link_to sponsor.name.to_s, sponsor.link.to_s, title: sponsor.name.to_s %> - <%= strip_tags(sponsor.description.to_s.html_safe) %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+
 
         <div class="clearfix"></div>
 
         </div>
-        <div class="col-md-12">
-          <ul class="list-inline">
-            <br />
-            <li><strong>Subscribe:</strong></li>
-            <% if @episode.podcast.itunes? %>
-              <li><%= link_to @episode.podcast.itunes, target: "_blank", rel: "noopener", title: "Apple Podcasts" do %>
-                Apple Podcasts<% end %></li>
-            <% end %>
-            <% if @episode.podcast.google? %>
-              <li><%= link_to @episode.podcast.google, target: "_blank", rel: "noopener", title: "Google Play" do %>
-                Google Play<% end %></li>
-            <% end %>
-            <% if @episode.podcast.spotify? %>
-              <li><%= link_to @episode.podcast.spotify, target: "_blank", rel: "noopener", title: "Spotify" do %>
-                Spotify<% end %></li>
-            <% end %>
-            <% if @episode.podcast.stitcher? %>
-              <li><%= link_to @episode.podcast.stitcher, target: "_blank", rel: "noopener", title: "Stitcher" do %>
-                Stitcher<% end %></li>
-            <% end %>
-            <% if @episode.podcast.tunein? %>
-              <li><%= link_to @episode.podcast.tunein, target: "_blank", rel: "noopener", title: "TuneIn" do %>
-                TuneIn<% end %></li>
-            <% end %>
-            <% if @episode.podcast.youtube? %>
-              <li><%= link_to @episode.podcast.youtube, target: "_blank", rel: "noopener", title: "YouTube" do %>
-                YouTube<% end %></li>
-            <% end %>
-            <li><%= link_to root_url + "podcasts/" + @episode.podcast.slug.to_s + ".rss", title: "RSS" do %>
-              RSS<% end %></li>
-          </ul>
-        </div>
+        
       </div>
 
       <div class="panel-footer">

@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :sponsors
   resources :settings
   constraints(host: /^www\./i) do
     match '(*any)' => redirect { |params, request|
@@ -65,7 +66,5 @@ Rails.application.routes.draw do
   get 'analytics' => 'pages#analytics', as: :analytics
   get 'sitemap.xml', :to => 'pages#sitemap', :defaults => { :format => 'xml' }
   get 'robots.:format' => 'pages#robots'
-  get 'digitalocean' => 'pages#digitalocean'
-  get 'audible' => 'pages#audible'
   get '*path' => redirect('/')
 end

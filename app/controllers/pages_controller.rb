@@ -117,12 +117,4 @@ class PagesController < ApplicationController
     end
   end
 
-  def digitalocean
-    redirect_to "https://m.do.co/c/2596b51ba2f2"
-  end
-
-  def audible
-    redirect_to "https://www.amazon.com/Audible-Free-Trial-Digital-Membership/dp/B00NB86OYE/?ref_=assoc_tag_ph_1485906643682&_encoding=UTF8&camp=1789&creative=9325&linkCode=pf4&tag=nerdylegion-20&linkId=0ae98708666f76c3361aa8e3980d1dc9"
-  end
-
 end
