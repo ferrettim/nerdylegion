@@ -28,7 +28,8 @@
 
 # Ignore application configuration
 # /config/application.yml
-/config/credentials.ymc.enc
+/config/credentials.yml.enc
+/config/secrets.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
