@@ -3,18 +3,18 @@
   <div class="container-fluid">
     <div class="navbar-footer text-center">
       <ul class="list-inline small">
-        <% if $settings_exist %>
-          <% if $setting.twitter? %>
-            <li><%= link_to "https://www.twitter.com/" + $setting.twitter.to_s, title: "Follow us on Twitter" do %><i class="fa fa-twitter"></i><% end %></li>
+        <% if Setting.count > 0 %>
+          <% if Setting.first.twitter? %>
+            <li><%= link_to "https://www.twitter.com/" + Setting.first.twitter.to_s, title: "Follow us on Twitter" do %><i class="fa fa-twitter"></i><% end %></li>
           <% end %>
-          <% if $setting.facebook? %>
-            <li><%= link_to $setting.facebook.to_s, title: "Follow us on Facebook" do %><i class="fa fa-facebook"></i><% end %></li>
+          <% if Setting.first.facebook? %>
+            <li><%= link_to Setting.first.facebook.to_s, title: "Follow us on Facebook" do %><i class="fa fa-facebook"></i><% end %></li>
           <% end %>
-          <% if $setting.instagram? %>
-            <li><%= link_to $setting.instagram.to_s, title: "Follow us on Instagram" do %><i class="fa fa-instagram"></i><% end %></li>
+          <% if Setting.first.instagram? %>
+            <li><%= link_to Setting.first.instagram.to_s, title: "Follow us on Instagram" do %><i class="fa fa-instagram"></i><% end %></li>
           <% end %>
-          <% if $setting.twitch? %>
-            <li><%= link_to $setting.twitch.to_s, title: "Follow us on Twitch" do %><i class="fa fa-twitch"></i><% end %></li>
+          <% if Setting.first.twitch? %>
+            <li><%= link_to Setting.first.twitch.to_s, title: "Follow us on Twitch" do %><i class="fa fa-twitch"></i><% end %></li>
           <% end %>
         <% end %>
         <% if Privacy.all.count == 1 %>
@@ -35,8 +35,8 @@
           <li><%= link_to "Login", new_user_session_path, title: "Login" %></li>
         <% end %>
         <br />
-        <% if $settings_exist %>
-          <small><%= $setting.name.to_s %> &copy; <%= Time.now.strftime("%Y") %></small>
+        <% if Setting.count > 0 %>
+          <small><%= Setting.first.name.to_s %> &copy; <%= Time.now.strftime("%Y") %></small>
         <% else %>
           Powered by Sprout
         <% end %>

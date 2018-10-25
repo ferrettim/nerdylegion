@@ -12,7 +12,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <% if $settings_exist %>
+                    <% if Setting.count > 0 && Setting.first.name? %>
                       <h1 class="navbar-header">
                         <%= link_to $setting.name.to_s, root_url, title: $setting.name.to_s, class: "navbar-brand" %></h1>
                     <% else %>
@@ -65,7 +65,7 @@
                         <% end %>
                       </li>
                       <li><%= link_to "Subscribe", subscribe_path, title: "Subscribe" %></li>
-                      <% if Setting.first.merch? %>
+                      <% if Setting.count > 0 && Setting.first.merch? %>
                         <li><%= link_to "Merch", Setting.first.merch.to_s, target: "_blank", rel: "noopener", title: "Merch" %></li>
                       <% end %>
                       <% unless user_signed_in? %>
