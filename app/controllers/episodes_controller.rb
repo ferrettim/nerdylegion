@@ -23,6 +23,9 @@ class EpisodesController < ApplicationController
   # GET /episodes/1.json
   def show
     @sponsors = Sponsor.where(status: true)
+    @host = User.where(id: @episode.podcast.user_id)
+    @host2 = User.where(id: @episode.podcast.user2_id)
+    @host3 = User.where(id: @episode.podcast.user3_id)
     if user_signed_in?
       if current_user.admin?
         @previous = Episode.where(podcast_id: @episode.podcast.id).where(status: "Published").where(episode: @episode.episode - 1).first

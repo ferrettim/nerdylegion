@@ -1,9 +1,54 @@
 <div class="col-md-3 col-sm-3 visible-lg visible-md visible-sm">
-  <h4>Brought To You By</h4>
-  <% Sponsor.all.each do |sponsor| %>
-    <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s do %>
-      <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s, class: "img-responsive" %>
+  <% if controller_name == "episodes" && action_name == "show" %>
+    <h4>About This Show</h4>
+    <%= @episode.podcast.description.to_s.html_safe %>
+    <h4>Hosted By</h4>
+    <% @host.each do |host| %>
+      <p><% if host.imageurl? %><%= image_tag host.imageurl.thumb.to_s, alt: host.name.to_s, width: "25px;" %><% else %><%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/nouserlogo.gif", alt: host.name.to_s, width: "25px;" %><% end %> <%= link_to "https://www.twitter.com" + host.twitter.to_s, title: host.name.to_s do %><%= host.name.to_s %><% end %></p>
     <% end %>
-    <br />
+    <% @host2.each do |host2| %>
+      <p><% if host2.imageurl? %><%= image_tag host2.imageurl.thumb.to_s, alt: host2.name.to_s, width: "25px;" %><% else %><%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/nouserlogo.gif", alt: host2.name.to_s, width: "25px;" %><% end %> <%= link_to "https://www.twitter.com" + host2.twitter.to_s, title: host2.name.to_s do %><%= host2.name.to_s %><% end %></p>
+    <% end %>
+    <% @host2.each do |host3| %>
+      <% if host3.imageurl? %><%= image_tag host3.imageurl.thumb.to_s, alt: host3.name.to_s, width: "25px;" %><% else %><%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/nouserlogo.gif", alt: host3.name.to_s, width: "25px;" %><% end %> <%= link_to "https://www.twitter.com" + host3.twitter.to_s, title: host3.name.to_s do %><%= host3.name.to_s %><% end %>
+    <% end %>
+    <h4>Subscribe Now</h4>
+    <ul class="list-unstyled subscribe-buttons">
+      <% if @episode.podcast.itunes? %>
+        <li><%= link_to @episode.podcast.itunes, target: "_blank", rel: "noopener", title: "Apple Podcasts" do %>
+          Via Apple Podcasts<% end %></li>
+      <% end %>
+      <% if @episode.podcast.google? %>
+        <li><%= link_to @episode.podcast.google, target: "_blank", rel: "noopener", title: "Google Play" do %>
+          Via Google Play<% end %></li>
+      <% end %>
+      <% if @episode.podcast.spotify? %>
+        <li><%= link_to @episode.podcast.spotify, target: "_blank", rel: "noopener", title: "Spotify" do %>
+          Via Spotify<% end %></li>
+      <% end %>
+      <% if @episode.podcast.stitcher? %>
+        <li><%= link_to @episode.podcast.stitcher, target: "_blank", rel: "noopener", title: "Stitcher" do %>
+          Via Stitcher<% end %></li>
+      <% end %>
+      <% if @episode.podcast.tunein? %>
+        <li><%= link_to @episode.podcast.tunein, target: "_blank", rel: "noopener", title: "TuneIn" do %>
+          Via TuneIn<% end %></li>
+      <% end %>
+      <% if @episode.podcast.youtube? %>
+        <li><%= link_to @episode.podcast.youtube, target: "_blank", rel: "noopener", title: "YouTube" do %>
+          Via YouTube<% end %></li>
+      <% end %>
+      <li><%= link_to root_url + "podcasts/" + @episode.podcast.slug.to_s + ".rss", title: "RSS" do %>
+        Via RSS<% end %></li>
+    </ul>
+  <% else %>
+    <h4>Brought To You By</h4>
+    <% Sponsor.all.each do |sponsor| %>
+      <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s do %>
+        <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s %>
+      <% end %>
+      <br />
+    <% end %>
   <% end %>
+
 </div>
