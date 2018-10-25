@@ -81,7 +81,6 @@
                               <li><%= link_to "New Podcast", new_podcast_path, title: "New Podcast", "data-turbolinks" => "false" if current_user.admin? %></li>
                               <li><%= link_to "Pending Episodes", pending_path, title: "View pending episodes", "data-turbolinks" => "false" if current_user.podcaster? %></li>
                               <% if current_user.admin? %>
-                                <li class="text-center">-------------------------------</li>
                                 <li><%= link_to "Sidekiq Queue", sidekiq_path, title: "Sidekiq Queue", "data-turbolinks" => "false" %></li>
                                 <% if $settings_exist %>
                                   <li><%= link_to "Site Settings", edit_setting_path(Setting.find(1)), title: "Site Settings", "data-turbolinks" => "false" %></li>
@@ -89,7 +88,7 @@
                                   <li><%= link_to "Site Settings", new_setting_path, title: "Site Settings", "data-turbolinks" => "false" %></li>
                                 <% end %>
                                 <li><%= link_to "Sponsors", sponsors_path, title: "Sponsors", "data-turbolinks" => "false" %></li>
-                                <li><%= link_to "User Administration", user_admin_path, title: "User Administration", "data-turbolinks" => "false" %></li>
+                                <li><%= link_to "Users", user_admin_path, title: "User Administration", "data-turbolinks" => "false" %></li>
                               <% end %>
                               <li class="text-center">-------------------------------</li>
                               <li><%= link_to "Edit Profile", edit_user_registration_path, title: "Edit profile" %></li>
