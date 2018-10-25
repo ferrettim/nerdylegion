@@ -79,6 +79,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:name, :description, :title, :keywords, :favicon, :patreon, :facebook, :twitter, :instagram, :twitch, :reddit)
+      params.require(:setting).permit(:name, :description, :title, :keywords, :favicon, :patreon, :merch, :facebook, :twitter, :instagram, :twitch, :reddit)
     end
 end

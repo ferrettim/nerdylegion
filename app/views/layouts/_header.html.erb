@@ -65,7 +65,9 @@
                         <% end %>
                       </li>
                       <li><%= link_to "Subscribe", subscribe_path, title: "Subscribe" %></li>
-                      <li class="visible-xs"><%= link_to "Merch", "https://nerdylegion.threadless.com/", target: "_blank", rel: "noopener", title: "Merch" %></li>
+                      <% if Setting.first.merch? %>
+                        <li><%= link_to "Merch", Setting.first.merch.to_s, target: "_blank", rel: "noopener", title: "Merch" %></li>
+                      <% end %>
                       <% unless user_signed_in? %>
                         <li class="visible-xs"><%= link_to "Login", new_user_session_path, target: "_blank", rel: "noopener", title: "Login" %></li>
                       <% end %>

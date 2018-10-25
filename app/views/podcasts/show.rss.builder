@@ -70,29 +70,29 @@ xml.rss( :version=>"2.0", :"xmlns:atom"=>"http://www.w3.org/2005/Atom", :"xmlns:
         if article.shownotes?
           if @podcast.patreon?
             if Sponsor.count > 0
-              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
+              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
             else
-              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
             end
           else
             if Sponsor.count > 0
-              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
+              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
             else
-              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+              xml.description feedsum + "<br />" + article.shownotes.html_safe + "You can support this show by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
             end
           end
         else
           if @podcast.patreon?
             if Sponsor.count > 0
-              xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
+              xml.description feedsum + "<br /><br />You can support this show directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
             else
-              xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+              xml.description feedsum + "<br /><br />You can support this show directly <a href='" + @podcast.patreon.to_s + "'>through Patreon</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
             end
           else
             if Sponsor.count > 0
-              xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
+              xml.description feedsum + "<br /><br />You can support this show by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>. This episode is <a href='" + sponsor.link.to_s + "'>sponsored by " + sponsor.name.to_s + "</a>. " + strip_tags(sponsor.description.to_s)
             else
-              xml.description feedsum + "<br /><br />You can support this show by visiting our <a href='https://nerdylegion.threadless.com'>merch store</a>, or by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
+              xml.description feedsum + "<br /><br />You can support this show by leaving us an <a href='" + @podcast.itunes.to_s + "'>Apple Podcasts review</a>."
             end
           end
         end
