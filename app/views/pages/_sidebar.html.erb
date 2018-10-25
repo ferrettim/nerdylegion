@@ -44,7 +44,7 @@
   <% else %>
     <h4>Brought To You By</h4>
     <% Sponsor.all.each do |sponsor| %>
-      <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s do %>
+      <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s + ", " + strip_tags(sponsor.description.to_s.html_safe) do %>
         <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s %>
       <% end %>
       <br />
