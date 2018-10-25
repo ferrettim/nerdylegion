@@ -17,7 +17,7 @@
           <tr>
             <td><h4 class="body-header"><%= sponsor.name.to_s %></h4></td>
             <td><%= link_to "Link", sponsor.link.to_s, title: sponsor.name.to_s %></td>
-            <td><%= image_tag sponsor.image.thumb.to_s, alt: sponsor.name.to_s %></td>
+            <td><%= image_tag sponsor.image.thumb.to_s, alt: sponsor.name.to_s, class: "img-responsive" %></td>
             <td><%= sponsor.status.to_s %></td>
             <td class="text-center">
               <%= link_to 'Show', sponsor, class: "btn btn-primary btn-sm" %>
