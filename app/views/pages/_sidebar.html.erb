@@ -42,12 +42,21 @@
         Via RSS<% end %></li>
     </ul>
   <% else %>
-    <h4>Brought To You By</h4>
-    <% Sponsor.all.each do |sponsor| %>
-      <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s + ", " + strip_tags(sponsor.description.to_s.html_safe) do %>
-        <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s, class: "img-responsive" %>
+    <% if Sponsor.count > 0 %>
+      <h4>Brought To You By</h4>
+      <% Sponsor.all.each do |sponsor| %>
+        <%= link_to sponsor.link.to_s, target: "_blank", rel: "noopener", title: sponsor.name.to_s + ", " + strip_tags(sponsor.description.to_s.html_safe) do %>
+          <%= image_tag sponsor.image.large.to_s, alt: sponsor.name.to_s, class: "img-responsive" %>
+        <% end %>
+        <br />
+      <% end %>
+    <% else %>
+      <h4>Brought To You By</h4>
+      <%= link_to "https://github.com/ferrettim/nerdylegion", target: "_blank", rel: "noopener", title: "Learn more about Sprout" do %>
+        <%= image_tag "https://nl1.nyc3.digitaloceanspaces.com/assets/sprout.jpg", alt: "Sprout", class: "img-responsive", width: "200px" %>
       <% end %>
       <br />
+      <p>Sprout is a free and open source platform for creating and hosting podcasts, making it as simple and easy to use as possible.</p>
     <% end %>
   <% end %>
 </div>
