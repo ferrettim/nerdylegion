@@ -30,6 +30,9 @@
 # /config/application.yml
 /config/credentials.yml.enc
 /config/secrets.yml
+/dump.rdb
+/Gemfile.lock
+/nerdylegion2
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
